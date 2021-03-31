@@ -10,5 +10,5 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит.')
 
 bot.polling()"""
-
+"""не коммерческий проект"""
 # доделаю в другой раз
