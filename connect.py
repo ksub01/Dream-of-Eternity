@@ -1,4 +1,4 @@
-import telebot
+"""import telebot
 bot = telebot.TeleBot('1696360118:AAG6Z-R627A2GefoHgk8mmmjmbee5xS8f4o')
 
 
@@ -8,5 +8,7 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Привет!')
     else:
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит.')
-        
-bot.polling()
+
+bot.polling()"""
+
+# доделаю в другой раз
