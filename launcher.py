@@ -14,7 +14,6 @@ def start_game():
     """Функции, включающиеся перед самым запуском игры"""
     start.about()
     start.prologue()
-    start.guide()
 
 
 def setting():
@@ -41,8 +40,6 @@ def playing_loop():
             inventory.start_inventory()
         elif choice == '6':
             sages.dialogue()
-        else:
-            pass
     else:
         if not hero.alive():
             print("Вы проиграли. Озирис уничтожил мир, а Аркона пала.")

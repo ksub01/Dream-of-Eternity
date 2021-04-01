@@ -30,7 +30,7 @@ def parameters():
     if 'attack' in hero.parameter:
         print("Атака {}".format(hero.parameter['attack']))
     # отображение магии, если она есть у героя
-    if ('magic' in hero.parameter and 'magic_full' in hero.parameter and 'magic_force' in hero.parameter):
+    if 'magic' in hero.parameter and 'magic_full' in hero.parameter and 'magic_force' in hero.parameter:
         print('Магия {}/{}\n'
               'Магическая сила {}'.format(hero.parameter['magic'], hero.parameter['full_magic'],
                                           hero.parameter['magic_force']))
