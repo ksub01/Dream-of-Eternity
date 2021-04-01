@@ -25,7 +25,6 @@ def setting():
 def playing_loop():
     """Основной цикл игры, с действиями внутри города и боями"""
     while hero.alive():
-        """Основной цикл игры, город, место, где вы выбираете место куда пойти"""
         information.parameters()
         information.town_places()
         information.if_lvl_up()
@@ -45,7 +44,7 @@ def playing_loop():
         else:
             pass
     else:
-        if hero.parameter['heart'] <= 0:
+        if not hero.alive():
             print("Вы проиграли. Озирис уничтожил мир, а Аркона пала.")
 
 
