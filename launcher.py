@@ -1,5 +1,5 @@
 """Основной модуль запуска программы, подготовка к запуску, настройка и игровой цикл"""
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
 
 import start
 import information
@@ -10,6 +10,10 @@ import sages
 import casino
 import inventory
 import hero
+
+
+# сброс параметров после каждого вывода
+init(autoreset=True)
 
 
 def start_game():

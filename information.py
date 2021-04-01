@@ -2,59 +2,54 @@
 
 import hero
 import lvl_up
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
+
+
+# сброс параметров после каждого вывода
+init(autoreset=True)
 
 
 def pause():
     """Пауза после отображения текста, чтобы игрок успел прочитать"""
-    input('Нажмите Enter\n')  # задержка для того, чтобы игрок мог прочитать
+    input(Fore.CYAN + Style.DIM + 'Нажмите Enter\n')  # задержка для того, чтобы игрок мог прочитать
+    print(Style.RESET_ALL)
 
 
 def goodbye():
     """Прощание с игроком в любой ситуации"""
-    print("До свидания")
+    print(Fore.CYAN + Style.DIM + 'До свидания')
     pause()
 
 
-def end_massage():
-    print(Style.RESET_ALL)
-
-
 def end_game():
-    print("Вы проиграли. Озирис уничтожил мир, а Аркона пала.")
-    end_massage()
+    print(Fore.RED + Style.BRIGHT + 'Вы проиграли. Озирис уничтожил мир, а Аркона пала.')
 
 
 def not_enough_money():
     """Отобаражает, что у игрока не хватает денег"""
-    print("У вас не хватает денег")
+    print(Fore.GREEN + "У вас не хватает денег")
     pause()
 
 
 def parameters():
     """Отражение параметров героя в зависимости от выбранного класса героя"""
-    print("Ваш класс: {}\nВаши характеристики:\nЗдоровье {}/{}".format(hero.parameter['name'],
-                                                                       hero.parameter['heart'],
-                                                                       hero.parameter['heart_full']))
-    # отображение атаки, если герой не маг
+    print(Fore.MAGENTA + "Ваш класс: {}".format(hero.parameter['name']))
+    print(Fore.WHITE + Style.BRIGHT + "Уровень {}".format(hero.parameter['lvl']), end='  ')
+    print(Fore.RED + Style.BRIGHT + "❤ {}/{}".format(hero.parameter['heart'],
+                                                            hero.parameter['heart_full']), end='  ')
+    print(Fore.YELLOW + '🪙 {}'.format(hero.parameter['gold']), end='  ')
+
     if 'attack' in hero.parameter:
-        print("Атака {}".format(hero.parameter['attack']))
-    # отображение магии, если она есть у героя
-    if 'magic' in hero.parameter and 'magic_full' in hero.parameter and 'magic_force' in hero.parameter:
-        print('Магия {}/{}\n'
-              'Магическая сила {}'.format(hero.parameter['magic'], hero.parameter['full_magic'],
-                                          hero.parameter['magic_force']))
-    # отображение всех остальных характеристик, которыми обладают все
-    print("Сила {}\n"
-          "Броня {}\n"
-          "Ловкость {}\n"
-          "Мудрость {}\n"
-          "Золото {}\n"
-          "Опыт {}\n"
-          "Уровень {}\n".format(hero.parameter['force'], hero.parameter['defence'],
-                                hero.parameter['dexterity'], hero.parameter['wisdom'],
-                                hero.parameter['gold'],
-                                hero.parameter['exp'], hero.parameter['lvl']))
+        print(Fore.BLUE + "⚔ {}".format(hero.parameter['attack']), end='  ')
+    if 'magic' in hero.parameter:
+        print(Fore.BLUE + 'Магия {}/{}'.format(hero.parameter['magic'],
+                                                              hero.parameter['full_magic']))
+        print(Fore.CYAN + 'Магическая сила {}'.format(hero.parameter['magic_force']))
+    print(Fore.LIGHTBLUE_EX + Style.DIM + '👊 {}'.format(hero.parameter['force']), end='  ')
+    print(Fore.LIGHTMAGENTA_EX + '🛡 {}'.format(hero.parameter['defence']), end='  ')
+    print(Fore.GREEN + '🥾 {}'.format(hero.parameter['dexterity']), end='  ')
+    print(Fore.LIGHTBLUE_EX + Style.DIM + '🧠 {}'.format(hero.parameter['wisdom']), end='  ')
+    print(Fore.GREEN + '📖 {}\n'.format(hero.parameter['exp']), end='')
 
 
 def if_lvl_up():
