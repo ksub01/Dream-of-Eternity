@@ -1,4 +1,6 @@
 """Основной модуль запуска программы, подготовка к запуску, настройка и игровой цикл"""
+from colorama import Fore, Back, Style
+
 import start
 import information
 import blacksmith
@@ -42,7 +44,7 @@ def playing_loop():
             sages.dialogue()
     else:
         if not hero.alive():
-            print("Вы проиграли. Озирис уничтожил мир, а Аркона пала.")
+            information.end_game()
 
 
 if __name__ == '__main__':

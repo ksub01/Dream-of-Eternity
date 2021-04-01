@@ -2,6 +2,7 @@
 
 import hero
 import lvl_up
+from colorama import Fore, Back, Style
 
 
 def pause():
@@ -13,6 +14,15 @@ def goodbye():
     """Прощание с игроком в любой ситуации"""
     print("До свидания")
     pause()
+
+
+def end_massage():
+    print(Style.RESET_ALL)
+
+
+def end_game():
+    print("Вы проиграли. Озирис уничтожил мир, а Аркона пала.")
+    end_massage()
 
 
 def not_enough_money():
