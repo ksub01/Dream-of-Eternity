@@ -23,8 +23,8 @@ def setting():
 
 
 def playing_loop():
-    """Основной цикл игры, с вычвелчивание города и боями"""
-    while hero.parameter['heart'] > 0:
+    """Основной цикл игры, с действиями внутри города и боями"""
+    while hero.alive():
         """Основной цикл игры, город, место, где вы выбираете место куда пойти"""
         information.parameters()
         information.town_places()

@@ -301,3 +301,7 @@ def use_skill(name_skills, monster, value):
             fight.who_first_attack(monster)
     else:
         print('Навык нельзя больше использовать')
+
+
+def alive():
+    return parameter['heart'] > 0
