@@ -1,4 +1,8 @@
 """Место, где находятся все словари монстров"""
+from colorama import Fore, Back, Style
+
+MESSAGE_DAMAGE = Fore.RED + Style.DIM
+MESSAGE_HEAL = Fore.GREEN + Style.BRIGHT
 
 # основной словарь со всеми монстрами и их характеристиками
 monsters = {1: {'name': 'Гоблин Воин', 'full_heart': 50, 'heart': 50, 'full_attack': 2, 'attack': 2, 'defence': 0,
@@ -34,7 +38,7 @@ def monster_recovery_heart(name, heart):
     Принимает: словарь монстра для цели восстановления и количество здоровья,
     которое нужно восстановить"""
     name['heart'] += heart
-    print('Монстр восстановил {} здоровья'.format(heart))
+    print(MESSAGE_HEAL + 'Монстр восстановил {} здоровья'.format(heart))
 
 
 def monster_spend_heart(name, heart):
@@ -42,7 +46,7 @@ def monster_spend_heart(name, heart):
     Принимает: словарь монстра для цели восстановления и количество здоровья,
     которое монстр потерял"""
     name['heart'] -= heart
-    print('Монстр потерял {} здоровья'.format(heart))
+    print(MESSAGE_DAMAGE + 'Монстр потерял {} здоровья'.format(heart))
 
 
 def monster_recovery_attack(names, attack):

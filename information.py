@@ -2,16 +2,13 @@
 
 import hero
 import lvl_up
-from colorama import Fore, Back, Style, init
+from colorama import Fore, Back, Style
 
 INVENTORY_MESSAGE = Fore.GREEN + Style.BRIGHT
 DIE_MASSAGE = Fore.RED + Style.BRIGHT
 HELP_MESSAGE = Fore.CYAN + Style.DIM
 TOWN_MESSAGE = Style.DIM + Fore.LIGHTYELLOW_EX
 MENU_TOWN_MASSAGE = Fore.LIGHTBLUE_EX
-
-# сброс параметров после каждого вывода
-init(autoreset=True)
 
 
 def pause():

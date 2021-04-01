@@ -117,23 +117,23 @@ def using_skills(number_skills, name_monster):
 def monster_information(name):
     """Функция выдаёт всю инфрмацию о монстре при достаточной разнице в мудрости: равенство, больше на 5, больше на 10
     Передаётся: словарь монстра"""
-    print(name['name'])
+    print(name['name'] + ' 🐺')
     if hero.parameter['wisdom'] >= name['wisdom']:
         print("Уровень: {}".format(name['lvl']))
     else:
         print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 5:
-        print("Здоровье: {}\nАтака: {}".format(name['heart'],
+        print("🖤: {}\nАтака: {}".format(name['heart'],
                                                name['attack']))
     else:
         print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 10:
-        print("Защита: {}\nЛовкость: {}".format(name['defence'],
+        print("⛨: {}\nЛовкость: {}".format(name['defence'],
                                                 name['dexterity']))
     else:
         print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 15:
-        print("Особое свойство: {}\n".format(name['property']))
+        print(name['property'])
     else:
         print("?" * 10)
 
