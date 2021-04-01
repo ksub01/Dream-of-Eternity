@@ -1,8 +1,8 @@
 """Место, где находятся все словари монстров"""
 from colorama import Fore, Back, Style
 
-MESSAGE_DAMAGE = Fore.RED + Style.DIM
-MESSAGE_HEAL = Fore.GREEN + Style.BRIGHT
+MESSAGE_DAMAGE = Fore.GREEN + Style.DIM
+MESSAGE_HEAL = Fore.MAGENTA + Style.BRIGHT
 
 # основной словарь со всеми монстрами и их характеристиками
 monsters = {1: {'name': 'Гоблин Воин', 'full_heart': 50, 'heart': 50, 'full_attack': 2, 'attack': 2, 'defence': 0,

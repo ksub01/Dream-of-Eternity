@@ -1,10 +1,16 @@
 """Этот модуль служит для выдачи основной информации о параметрах, навыках и статистике"""
 
+from  colorama import Fore, Style
+
 import inventory
 import items
 import fight
 import information
 import lvl_up
+
+
+MESSAGE_DAMAGE = Fore.RED + Style.BRIGHT
+
 
 # при выборе класса, один из этих словарей добавляется в параметры игрока
 parameter_lord = {'heart_full': 20, 'heart': 20, 'attack': 0, 'force': 3, 'defence_full': 0, 'defence': 0,
@@ -116,7 +122,7 @@ def heart_new(heart):
 def heart_spend(heart):
     """В функцию подаём значение здоровья, которое игрок теряет"""
     parameter['heart'] -= heart
-    print('Вы потеряли {} здоровья'.format(heart))
+    print(MESSAGE_DAMAGE + 'Вы потеряли {} здоровья'.format(heart))
 
 
 def heart_recovery(heart):
