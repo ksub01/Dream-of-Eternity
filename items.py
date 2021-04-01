@@ -2,7 +2,7 @@
 import random
 import inventory
 import hero
-import parameters
+import information
 
 
 def chest_open(num):
@@ -25,7 +25,7 @@ def chest_open(num):
         # игрок получает количество золота, помноженное на уровень, если предмета не выпало
         hero.gold_receive(throw * hero.parameter['lvl'])
     # пауза при любом исходе
-    parameters.pause()
+    information.pause()
 
 
 new_item_for_future = """Меч труса повышает вероятность побега

@@ -3,7 +3,7 @@
 import inventory
 import items
 import fight
-import parameters
+import information
 import lvl_up
 
 # при выборе класса, один из этих словарей добавляется в параметры игрока
@@ -189,28 +189,28 @@ def heart_full_upgrade(heart):
     """Увеличивает количество максимального здоровья на данную велечину"""
     parameter['heart_full'] += heart
     print('Ваше максмальное здоровье увеличилась на {}'.format(heart))
-    parameters.pause()
+    information.pause()
 
 
 def force_upgrade(force):
     """Увеличивает количество силы игрока на данную велечину"""
     parameter['force'] += force
     print('Ваша сила увеличилась на {}'.format(force))
-    parameters.pause()
+    information.pause()
 
 
 def dexterity_upgrade(dexterity):
     """Увеличивает количество ловкости игрока на данную велечину"""
     parameter['dexterity'] += dexterity
     print('Ваша ловкость увеличилась на {}'.format(dexterity))
-    parameters.pause()
+    information.pause()
 
 
 def wisdom_upgrade(wisdom):
     """Увеличивает количество мудрости игрока на данную велечину"""
     parameter['wisdom'] += wisdom
     print('Ваша мудрость увеличилась на {}'.format(wisdom))
-    parameters.pause()
+    information.pause()
 
 
 def get_lvl(num):
@@ -219,7 +219,7 @@ def get_lvl(num):
     parameter['lvl'] += num
     print("Ваш уровень повышен {} => {}".format(parameter['lvl'] - num, parameter['lvl']))
     inventory.give_chest(100, 100, parameter['lvl'] - 1, 0)
-    parameters.pause()
+    information.pause()
 
 
 def append_new_nav(name, nav_hero):
@@ -230,7 +230,7 @@ def append_new_nav(name, nav_hero):
     nav_hero_have[name][0] += 1
     print('Вы получили новый навык {}'.format(name))
     skills_additional_setting(name)
-    parameters.pause()
+    information.pause()
 
 
 def upgrade_lvl_nav(name):
@@ -239,7 +239,7 @@ def upgrade_lvl_nav(name):
     nav_hero_have[name][0] += 1
     print('Навык {} {} -> {} прокачен'.format(name, nav_hero_have[name][0] - 1, nav_hero_have[name][0]))
     skills_additional_setting(name)
-    parameters.pause()
+    information.pause()
 
 
 def skills_additional_setting(name):

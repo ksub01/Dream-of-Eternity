@@ -3,13 +3,13 @@
 
 import hero
 import inventory
-import parameters
+import information
 
 
 def dialogue():
     """Функция для получения заданий и получение награды"""
     print('Здесь вы получаете поручения от основателей, чтобы помочь людям в это нелёгкое время, по заданым заданиям')
-    parameters.pause()
+    information.pause()
     # если пришёл первый раз
     if hero.statistics['mission'] == 0:
         # миссия 1 начинается
@@ -53,7 +53,7 @@ def mission_1_start():
             # обновление статуса миссии при принятии
             hero.mission_complete(1)
             print('Желаем удачи. Да снизайдёт на тебя мудрость')
-            parameters.pause()
+            information.pause()
             # выход в город
             break
         elif choice == '2':
@@ -75,10 +75,10 @@ def mission_1_complete():
     # переход на вторую симмию
     hero.mission_complete(2)
     # пауза перед выходом
-    parameters.pause()
+    information.pause()
 
 
 def delirium():
     """Бред, что несут мудрецы, пока заданий нет или оно не выполнено"""
     print('Ты должен помочь нам, во благо этого мира')
-    parameters.pause()
+    information.pause()

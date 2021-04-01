@@ -3,8 +3,7 @@
 
 import hero
 import lvl_up
-import parameters
-import town
+import information
 
 # количество золота для лечения в разных локациях
 price_for_sleep_in_different_location = [0, 5, 40, 100, 400, 800, 1200, 1700, 2100, 2600, 3000]
@@ -33,13 +32,13 @@ def dialogue():
                     price_for_sleep_in_different_location[hero.statistics['location']])
                 # запускается сон - основной процесс в котором происходит лечение и поднятие уровня
                 sleep()
-                parameters.goodbye()
+                information.goodbye()
                 # выход из цикла гостиницы и возвращение в город
                 break
             else:
-                town.not_enough_money()
+                information.not_enough_money()
         elif k == '2':
-            parameters.goodbye()
+            information.goodbye()
             # выход из цикла гостиницы и возвращение в город
             break
         else:

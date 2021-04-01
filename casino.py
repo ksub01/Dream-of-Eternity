@@ -3,8 +3,7 @@
 
 import hero
 import random
-import town
-import parameters
+import information
 
 
 def dialogue():
@@ -42,7 +41,7 @@ def goodbye(func):
             # запуск функции игры
             func()
         elif what == '2':
-            parameters.goodbye()
+            information.goodbye()
             # выход в главное меню казино
             break
         else:
@@ -63,11 +62,11 @@ def gold_jackpot():
             gold = int(gold)
             hero.gold_spending(gold)
             print("Игра начинается\nИтак выпало...")
-            parameters.pause()
+            information.pause()
             win_gold = random.randint(0, gold * 2)
             hero.gold_receive(win_gold)
-            parameters.pause()
+            information.pause()
         else:
-            town.not_enough_money()
+            information.not_enough_money()
     else:
         pass

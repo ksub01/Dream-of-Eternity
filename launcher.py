@@ -1,7 +1,6 @@
 """Основной модуль запуска программы, подготовка к запуску, настройка и игровой цикл"""
 import start
-import parameters
-import town
+import information
 import blacksmith
 import fight
 import hotel
@@ -13,29 +12,23 @@ import hero
 
 def start_game():
     """Функции, включающиеся перед самым запуском игры"""
-    start.parameters()
+    start.about()
     start.prologue()
     start.guide()
 
 
 def setting():
-    """Загрузка и выбор класса перед началом игры"""
-    ans = input("Хотите ли вы загрузить игру или хотите начать новую? Начать новую => 1 Загрузить => 2\n")
-    if ans == '1':
-        pass
-    else:
-        pass
+    """Выбор класса перед началом игры"""
     start.choice_class()
 
 
 def playing_loop():
     """Основной цикл игры, с вычвелчивание города и боями"""
-
     while hero.parameter['heart'] > 0:
         """Основной цикл игры, город, место, где вы выбираете место куда пойти"""
-        parameters.display_parameters()
-        town.places()
-        town.display_lvl_up()
+        information.parameters()
+        information.town_places()
+        information.if_lvl_up()
         choice = input()
         if choice == '1':
             blacksmith.dialogue()
@@ -56,6 +49,7 @@ def playing_loop():
             print("Вы проиграли. Озирис уничтожил мир, а Аркона пала.")
 
 
-start_game()
-setting()
-playing_loop()
+if __name__ == '__main__':
+    start_game()
+    setting()
+    playing_loop()
