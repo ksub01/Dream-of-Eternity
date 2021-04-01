@@ -48,9 +48,9 @@ def parameters():
     if 'attack' in hero.parameter:
         print(Fore.BLUE + "⚔ {}".format(hero.parameter['attack']), end='  ')
     if 'magic' in hero.parameter:
-        print(Fore.BLUE + 'Магия {}/{}'.format(hero.parameter['magic'],
-                                                              hero.parameter['full_magic']))
-        print(Fore.CYAN + 'Магическая сила {}'.format(hero.parameter['magic_force']))
+        print(Fore.BLUE + '💧 {}/{}'.format(hero.parameter['magic_force'],
+                                            hero.parameter['magic_full']), end='  ')
+        print(Fore.CYAN + '✨ {}'.format(hero.parameter['magic_force']), end='  ')
     print(Fore.LIGHTBLUE_EX + Style.DIM + '👊 {}'.format(hero.parameter['force']), end='  ')
     print(Fore.LIGHTMAGENTA_EX + '🛡 {}'.format(hero.parameter['defence']), end='  ')
     print(Fore.GREEN + '🥾 {}'.format(hero.parameter['dexterity']), end='  ')

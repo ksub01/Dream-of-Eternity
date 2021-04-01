@@ -15,7 +15,7 @@ parameter_shadow_catcher = {'heart_full': 10, 'heart': 10, 'attack': 0, 'force':
                             'exp': 0, 'lvl': 1, 'name': 'Ловец душ', 'sign': '🍀'}
 parameter_sage = {'heart_full': 10, 'heart': 10, 'magic': 0, 'magic_full': 0, 'magic_force': 0, 'force': 3,
                   'defence_full': 0, 'defence': 0, 'dexterity': 6, 'wisdom': 3, 'gold': 10, 'exp': 0, 'lvl': 1,
-                  'class': 'name', 'sign': '📚'}
+                  'name': 'Маг', 'sign': '📚'}
 
 # то, что заполняется при старте игры одним из словарей ниже
 parameter = {}
