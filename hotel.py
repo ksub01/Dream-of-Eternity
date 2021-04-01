@@ -6,7 +6,7 @@ import lvl_up
 import information
 
 # количество золота для лечения в разных локациях
-price_for_sleep_in_different_location = [0, 5, 40, 100, 400, 800, 1200, 1700, 2100, 2600, 3000]
+price_sleep = [0, 5, 40, 100, 400, 800, 1200, 1700, 2100, 2600, 3000]
 
 
 def dialogue():
@@ -15,35 +15,25 @@ def dialogue():
     выбранной услуги для оказания её пользователю. Также тут запускается процесс сна где происходит восстановление
     параметров и повышение уровня"""
     while 1:
-        # выбор услуг
-        k = input("Вы находитесь в гостинице\n"
-                  "Здраствуйте. Воспользоваться нашими услугами вы можете за {} монет\n"
-                  "Согласны?\n"
-                  "Да => 1\n"
-                  # количество золота для восстановления в зависимости от локации
-                  "Нет => 2\n\n".format(price_for_sleep_in_different_location[hero.statistics['location']]))
-        if k == '1':
-            # если денег в инвентаре меньше чем цена за сон
-            if (hero.parameter['gold'] >=
-                    price_for_sleep_in_different_location[hero.statistics['location']]):
+        ans = input("Вы находитесь в гостинице\n"
+                    "Здраствуйте. Воспользоваться нашими услугами вы можете за {} монет\n"
+                    "Согласны?\n"
+                    "Да => 1\n"
+                    "Нет => 2\n\n".format(price_sleep[hero.statistics['location']]))
+        if ans == '1':
+            if hero.parameter['gold'] >= price_sleep[hero.statistics['location']]:
                 # тратятся деньги, причём индекс затрат равен параметру 'location' который берётся из статистики героя,
                 # важно учесть что он начинается с единицы
-                hero.gold_spending(
-                    price_for_sleep_in_different_location[hero.statistics['location']])
-                # запускается сон - основной процесс в котором происходит лечение и поднятие уровня
+                gold = price_sleep[hero.statistics['location']]
+                hero.gold_spending(gold)
                 sleep()
                 information.goodbye()
-                # выход из цикла гостиницы и возвращение в город
                 break
             else:
                 information.not_enough_money()
-        elif k == '2':
+        elif ans == '2':
             information.goodbye()
-            # выход из цикла гостиницы и возвращение в город
             break
-        else:
-            # пропуск при неправильной цифре
-            pass
 
 
 def sleep():
