@@ -2,7 +2,7 @@
 import hero
 import inventory
 import items
-import information
+import parameters
 import town
 
 
@@ -13,7 +13,7 @@ def get_item(item, discount):
         hero.gold_spending(int(item['gold'] * discount))
         inventory.give_thing(item)
         print('Спасибо за покупку\n')
-        information.pause()
+        parameters.pause()
     else:
         town.not_enough_money()
 
@@ -46,7 +46,7 @@ def dialogue():
                     pass
             else:
                 print('Простите')
-                information.pause()
+                parameters.pause()
                 pass
         elif choice_division == '2':
             display_armor(discount)
@@ -61,7 +61,7 @@ def dialogue():
                     pass
             else:
                 print('Простите')
-                information.pause()
+                parameters.pause()
                 pass
         elif choice_division == '3':
             display_cloak(discount)
@@ -76,7 +76,7 @@ def dialogue():
                     pass
             else:
                 print('Простите')
-                information.pause()
+                parameters.pause()
                 pass
         elif choice_division == '4':
             display_ring(discount)
@@ -90,7 +90,7 @@ def dialogue():
                     pass
             else:
                 print('Простите')
-                information.pause()
+                parameters.pause()
                 pass
         elif choice_division == '7':
             break

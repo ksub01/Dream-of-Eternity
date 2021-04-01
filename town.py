@@ -4,7 +4,7 @@
 
 import hero
 import lvl_up
-import information
+import parameters
 
 
 def display_lvl_up():
@@ -31,4 +31,4 @@ def places():
 def not_enough_money():
     """Отобаражает, что у игрока не хватает денег"""
     print("У вас не хватает денег")
-    information.pause()
+    parameters.pause()

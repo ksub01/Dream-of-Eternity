@@ -5,7 +5,7 @@ import random
 import hero
 import inventory
 import monsters
-import information
+import parameters
 
 
 def dragon_time():
@@ -17,11 +17,11 @@ def dragon_time():
         print('!' * 40)
         print('Озирис делится своей силой с лесом Смерти')
         print('!' * 40)
-        information.pause()
+        parameters.pause()
         return 2
     else:
         print('Сегодня лес спокоен и угрозы Озириса нет')
-        information.pause()
+        parameters.pause()
         return 1
 
 

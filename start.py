@@ -1,7 +1,7 @@
 """Тут содержатся все функции, запускаемые при первом запуске игры"""
 
 import hero
-import information
+import parameters
 
 
 def information():
@@ -13,7 +13,7 @@ def information():
 
 def prologue():
     """Вывод начальной информации о мире игры перед её началом"""
-    information.pause()
+    parameters.pause()
     # вся информация
     print('Здраствуй, великий герой Мрака, призванный спасти наш мир от великой угрозы.\n'
           'Опасность возникла внезапно, когда великий дракон Озирис поселился в нашем мире.\n'
@@ -41,7 +41,7 @@ def guide():
     ans = input("Хотите пройти обучение? Да => 1 Нет => 2\n")
     if ans == '1':
         print("Пока пусто")
-        information.pause()
+        parameters.pause()
     else:
         pass
 

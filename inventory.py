@@ -1,7 +1,7 @@
 import hero
 import items
 import random
-import information
+import parameters
 
 # словарь в вещи заменяется словарём
 equipment = {'sword': {},
@@ -138,7 +138,7 @@ def put_on_thing():
             pass
     else:
         print('Нечего надеть')
-        information.pause()
+        parameters.pause()
 
 
 def choice_item():
@@ -236,7 +236,7 @@ def take_off():
             pass
     else:
         print('Снять нечего')
-        information.pause()
+        parameters.pause()
 
 
 def take_off_sword():
@@ -349,10 +349,10 @@ def display_monsters_item():
         # inventory['loot'] - словарь с названием вещи и её количеством
         for items in inventory['loot']:
             print('{} количество *{}'.format(items, inventory['loot'][items]))
-        information.pause()
+        parameters.pause()
     else:
         print('У вас нет вещей, выпавших с монстров')
-        information.pause()
+        parameters.pause()
 
 
 def give_item(item, num):
@@ -385,7 +385,7 @@ def display_chest():
             print('{} Сундук {} уровня'.format(num, weapon))
     else:
         print('У вас нет сундуков')
-        information.pause()
+        parameters.pause()
 
 
 def give_chest(num1, num2, lvl_chest, chance_chest):
@@ -415,7 +415,7 @@ def open_chest(chest_num):
             pass
     else:
         print('Данного сундука нет в инвентаре')
-        information.pause()
+        parameters.pause()
 
 
 def items_in_use():

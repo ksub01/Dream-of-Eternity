@@ -5,7 +5,7 @@ import random
 import monsters
 import inventory
 import effects
-import information
+import parameters
 
 
 def dungeon():
@@ -49,7 +49,7 @@ def dungeon():
             break
         else:
             print('Другие локации пока не готовы')
-            information.pause()
+            parameters.pause()
             pass
 
 
@@ -76,7 +76,7 @@ def start_fight(name, what_event):
     print("!" * 50, "                 Начинается бой", "!" * 50, sep='\n')
     while hero.parameter['heart'] > 0 and name['heart'] > 0:
         hero.skills_clear()
-        information.display_parameters()
+        parameters.display_parameters()
         monster_information(name)
         print('Атака -> 1\n'
               'Побег -> 2')
@@ -84,7 +84,7 @@ def start_fight(name, what_event):
         choice = input()
         if choice == '1':
             who_first_attack(name)
-            information.pause()
+            parameters.pause()
         elif choice == '2':
             if escape(name) == 1:
                 break
@@ -111,7 +111,7 @@ def using_skills(number_skills, name_monster):
         if number == number_skills:
             hero.use_skill(skills, name_monster,
                            hero.count_active_skills[skills])
-            information.pause()
+            parameters.pause()
 
 
 def monster_information(name):
@@ -219,17 +219,17 @@ def monsters_hit(name):
 def escape(name):
     """Побег от монстра, вункция возвращает 1 если побег удался и 0 если не удался"""
     print("Вы пытаетесь сбежать")
-    information.pause()
+    parameters.pause()
     escape_from_monster = random.randint(1, 20)
     if escape_from_monster > 6:
         print("Вы сбежали")
         hero.defence_load()
-        information.pause()
+        parameters.pause()
         return 1
     else:
         print("Вам не удалось сбежать")
         monsters_hit(name)
-        information.pause()
+        parameters.pause()
         return 0
 
 
@@ -244,4 +244,4 @@ def rewards(name, event_dragon):
     hero.exp_receive(int(name['exp'] * coefficient_exp * event_dragon))
     inventory.give_chest(1, 100, name['lvl'], probability_chest)
     hero.defence_load()
-    information.pause()
+    parameters.pause()
