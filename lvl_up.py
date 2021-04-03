@@ -2,6 +2,8 @@ from colorama import Fore, Style
 
 import hero
 
+HELP_MESSAGE = Fore.CYAN + Style.DIM
+LVL_UP_MESSAGE = Fore.YELLOW + Style.BRIGHT
 passive_skills = ['Демонический облик']
 exp = [0, 50, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000, 1024000]
 
@@ -9,20 +11,20 @@ exp = [0, 50, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000,
 def start():
     """Функция, которой герой выбирает какие параметры прокачивать, не сделано для всех классов"""
     hero.get_lvl(1)
-    print("Выберите две характеристики для повышения")
-    print('Введите первую')
+    print(HELP_MESSAGE + "Выберите две характеристики для повышения")
+    print(HELP_MESSAGE + 'Введите первую')
     parameter()
-    print('Введите вторую')
+    print(HELP_MESSAGE + 'Введите вторую')
     parameter()
 
 
 def parameter():
     """Вы выбираете характеристику, она повышается. Ничего не возвращает"""
-    while 1:
-        number_characteristic = int(input('Здоровье + {} -> 1\n'
+    while True:
+        number_characteristic = int(input(LVL_UP_MESSAGE + 'Здоровье + {} -> 1\n'
                                           'Сила + {} -> 2\n'
                                           'Ловкость + {} -> 3\n'
-                                          'Мудрость + {} -> 4\n'
+                                          'Мудрость + {} -> 4\n' + Style.RESET_ALL +
                                           ''.format(10 * (hero.parameter['lvl'] - 1),
                                                     2 * (hero.parameter['lvl'] - 1),
                                                     3 * (hero.parameter['lvl'] - 1),
@@ -48,18 +50,15 @@ def choice_skills():  # выбор скила
     Навык характеризуется списком следующим образом 1ая цифра - уровень прокачки навыка от 0 до 3,
     2ая цифра - прокачка эффекта во всех четырёх состояниях навыка: не прокачен, первого уровня, второго,
     третьего. 3ая цифра - то, под каким номером он выводился игроку"""
-    while 1:
-        display_skills()
+    while True:
+        display_inf_skills()
         if hero.parameter['name'] == 'Повелитель':
             # переход в меню выбора навыка
             choice_lord_skills()
             break
-        else:
-            print('Не готово')
-            pass
 
 
-def display_skills():
+def display_inf_skills():
     """Отображение вкаченных навыков и уровней прокачки для всех классов"""
     if hero.parameter['name'] == 'Повелитель':
         if 'Длань господа' in hero.nav_hero_have:
@@ -82,31 +81,21 @@ def display_skills():
             demon_outlook = 0
         print('3 Демонический облик *{}*: Ваша атака увеличивается в 2 раза,\n'
               'но вы возвращаете [50, 40, 30] процентов урона себе'.format(demon_outlook))
-    else:
-        print('Для других классов не готово')
 
 
 def choice_lord_skills():
     """Выбор навыка лорда в зависимости от цифры. Передаётся цифра навыка, который игрок хочет вкачать"""
-    while 1:
+    while True:
         number = int(input('Какой навык прокачать?\n'))
         if number == 1:
             if upgrade_nav('Длань господа', [0, {1: 5, 2: 10, 3: 15}]) == 1:
                 break
-            else:
-                pass
         elif number == 2:
             if upgrade_nav('Божественное провиденье', [0, {1: 5, 2: 10, 3: 20}]) == 1:
                 break
-            else:
-                pass
         elif number == 3:
             if upgrade_nav('Демонический облик', [0, [50, 40, 30]]) == 1:
                 break
-            else:
-                pass
-        else:
-            pass
 
 
 def upgrade_nav(name, grade):
@@ -120,7 +109,7 @@ def upgrade_nav(name, grade):
             hero.upgrade_lvl_nav(name)
             return 1
         else:
-            print('Навык {} нельзя больше прокачать'.format(name))
+            print(Fore.RED + Style.BRIGHT + 'Навык {} нельзя больше прокачать'.format(name))
             return 0
     else:
         hero.append_new_nav(name, grade)
