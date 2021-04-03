@@ -23,13 +23,10 @@ def chest_open(num):
         inventory.give_ring(rare_ring[num])
     else:
         # игрок получает количество золота, помноженное на уровень, если предмета не выпало
-        hero.gold_receive(throw * hero.parameter['lvl'])
+        get_gold = throw * hero.parameter['lvl']
+        hero.gold_receive(get_gold)
     # пауза при любом исходе
     information.pause()
-
-
-new_item_for_future = """Меч труса повышает вероятность побега
-  кольцо Нейтрализует первые 20 урона, нанесённые противником"""
 
 
 """Мечи, которые можно купить в магазине"""
