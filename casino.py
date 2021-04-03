@@ -18,8 +18,8 @@ def dialogue():
     while True:
         choice = input(Style.RESET_ALL + MESSAGE_DIALOGUE + 'Здраствуйте. Вы находитесь в казино.'
                        ' Выберите варианты игры\n'
-                       'Золотой куш => 1\n'
-                       'Выйти => 2\n')
+                       'Золотой куш ➔ 1\n'
+                       'Выйти ➔ 2\n')
         if choice == '1':
             print(HELP_MESSAGE + 'Вы указываете золото, с вас его снимают, вам выпадает число золота, которое вы'
                   ' получаете\n'
@@ -49,7 +49,7 @@ def gold_jackpot():
     while True:
         gold = input(Style.RESET_ALL + MESSAGE_DIALOGUE + 'Приветствуем вас в игре Золотой куш.\n'
                      'Введите количество золота, которое вы ставите\n'
-                     'Введите "0", если хотите уйти\n')
+                     'Выход ➔ 0\n')
         if gold.isdigit() and gold != '0':
             if hero.parameter['gold'] >= int(gold):
                 gold = int(gold)
@@ -58,7 +58,7 @@ def gold_jackpot():
                       'Итак выпало...')
                 information.pause()
                 win_gold = random.randint(0, gold * 2)
-                print(Fore.BLACK + '*' + str(win_gold//2) + '*')
+                print(Fore.YELLOW + '*' + str(win_gold) + '*')
                 hero.gold_receive(win_gold)
                 information.pause()
             else:

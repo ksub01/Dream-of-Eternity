@@ -1,7 +1,9 @@
+from colorama import Fore, Style
+
 import hero
 
 passive_skills = ['Демонический облик']
-exp = [0, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000, 1024000]
+exp = [0, 50, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000, 1024000]
 
 
 def start():
@@ -9,12 +11,12 @@ def start():
     hero.get_lvl(1)
     print("Выберите две характеристики для повышения")
     print('Введите первую')
-    parametr()
+    parameter()
     print('Введите вторую')
-    parametr()
+    parameter()
 
 
-def parametr():
+def parameter():
     """Вы выбираете характеристику, она повышается. Ничего не возвращает"""
     while 1:
         number_characteristic = int(input('Здоровье + {} -> 1\n'

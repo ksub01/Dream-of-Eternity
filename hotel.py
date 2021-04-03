@@ -25,8 +25,8 @@ def dialogue():
         ans = input(Style.RESET_ALL + MESSAGE_DIALOGUE + 'Здраствуйте. Воспользоваться нашими услугами вы можете за'
                     ' {} монет\n'
                     'Согласны?\n'
-                    'Да => 1\n'
-                    'Нет => 2\n'.format(price_sleep[hero.statistics['location']]))
+                    'Да ➔ 1\n'
+                    'Нет ➔ 2\n'.format(price_sleep[hero.statistics['location']]))
         if ans == '1':
             if hero.parameter['gold'] >= price_sleep[hero.statistics['location']]:
                 # тратятся деньги, причём индекс затрат равен параметру 'location' который берётся из статистики героя,

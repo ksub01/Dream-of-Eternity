@@ -44,7 +44,7 @@ def choice_class():
     """Выбор класса в начале игры для присвоения словаря навыков игроку. Словарь находится в hero_stats"""
     while True:
         print(Fore.CYAN + 'Выберите класс:')
-        choice = input(Style.RESET_ALL + Fore.YELLOW + 'Повелитель => 1 (воин, владеющий силой и уничтожающий '
+        choice = input(Style.RESET_ALL + Fore.YELLOW + 'Повелитель ➔ 1 (воин, владеющий силой и уничтожающий '
                        'монстров мечом)\n')
         if choice == '1':
             hero.parameter_choice(hero.parameter_lord)
