@@ -13,8 +13,7 @@ MENU_TOWN_MASSAGE = Fore.LIGHTBLUE_EX
 
 def pause():
     """Пауза после отображения текста, чтобы игрок успел прочитать"""
-    input(HELP_MESSAGE + 'Нажмите Enter\n')  # задержка для того, чтобы игрок мог прочитать
-    print(Style.RESET_ALL, end='')
+    input(Style.RESET_ALL + HELP_MESSAGE + 'Нажмите Enter\n')  # задержка для того, чтобы игрок мог прочитать
 
 
 def goodbye():
