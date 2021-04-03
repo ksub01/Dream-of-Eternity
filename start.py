@@ -1,6 +1,6 @@
 """Тут содержатся все функции, запускаемые при первом запуске игры"""
 
-from colorama import Fore, Style, init
+from colorama import Fore, Style
 
 
 import hero

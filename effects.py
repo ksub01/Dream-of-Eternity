@@ -154,13 +154,11 @@ def before_award(monster):
         quantity_gold += 20
         print('Количество золота увеличено на 20%')
 
-    if inventory.equipment['armor'] != {} and inventory.equipment['armor']['name'] ==\
-            'Доспехи богатства':
+    if inventory.equipment['armor'] != {} and inventory.equipment['armor']['name'] == 'Доспехи богатства':
         quantity_gold += 10
         print('Количество золото увеличено на 10%')
 
-    if inventory.equipment['sword'] != {} and inventory.equipment['sword']['name'] ==\
-            'Меч повелителя гоблинов':
+    if inventory.equipment['sword'] != {} and inventory.equipment['sword']['name'] == 'Меч повелителя гоблинов':
         probability_chest += 5
         quantity_gold += 10
 
@@ -178,7 +176,3 @@ def before_award(monster):
     return coefficient_gold, probability_chest, coefficient_exp
 
 
-def get_items(name_monster):
-    """Функция выдаёт вам лут исходя из имени монстра и добавляет его в инвентарь"""
-    if random.randint(1, 2) == 1 and name_monster['name'] == 'Гоблин Воин':
-        inventory.give_item('Сердце гоблина война', 1)

@@ -60,7 +60,6 @@ def start_fight(name, what_event):
     hero.defence_save(hero.parameter['defence'])
     hero.skill_count_fill()
     hero.statistics_up_battle1()
-    inventory.items_in_use()
     # начальное окно для оглашения начала боя, работает один раз
     print("!" * 50, "                 Начинается бой", "!" * 50, sep='\n')
     while hero.parameter['heart'] > 0 and name['heart'] > 0:
@@ -112,13 +111,12 @@ def monster_information(name):
     else:
         print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 5:
-        print("🖤: {}\nАтака: {}".format(name['heart'],
-                                               name['attack']))
+        print("🖤: {}\nАтака: {}".format(name['heart'], name['attack']))
     else:
         print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 10:
         print("⛨: {}\nЛовкость: {}".format(name['defence'],
-                                                name['dexterity']))
+                                           name['dexterity']))
     else:
         print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 15:

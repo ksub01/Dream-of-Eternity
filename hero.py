@@ -1,6 +1,6 @@
 """Этот модуль служит для выдачи основной информации о параметрах, навыках и статистике"""
 
-from  colorama import Fore, Style
+from colorama import Fore, Style
 
 import inventory
 import items
