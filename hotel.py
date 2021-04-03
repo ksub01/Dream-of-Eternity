@@ -1,9 +1,15 @@
 """Модуль, описывающий то, как происходит восстановление здоровья героя и маны, а также повышение уровня (поднятие
 навыков и скилла) при приходе героя в гостиницу"""
 
+from colorama import Fore, Style
+
 import hero
 import lvl_up
 import information
+
+TOWN_MESSAGE = Style.DIM + Fore.LIGHTYELLOW_EX
+HELP_MESSAGE = Fore.CYAN + Style.DIM
+MESSAGE_DIALOGUE = Fore.GREEN
 
 # количество золота для лечения в разных локациях
 price_sleep = [0, 5, 40, 100, 400, 800, 1200, 1700, 2100, 2600, 3000]
@@ -14,12 +20,13 @@ def dialogue():
     гостиницы и происходит выбор услуг, а также происходит проверка
     выбранной услуги для оказания её пользователю. Также тут запускается процесс сна где происходит восстановление
     параметров и повышение уровня"""
-    while 1:
-        ans = input("Вы находитесь в гостинице\n"
-                    "Здраствуйте. Воспользоваться нашими услугами вы можете за {} монет\n"
-                    "Согласны?\n"
-                    "Да => 1\n"
-                    "Нет => 2\n\n".format(price_sleep[hero.statistics['location']]))
+    while True:
+        print(TOWN_MESSAGE + 'Вы находитесь в гостинице')
+        print(MESSAGE_DIALOGUE + 'Здраствуйте. Воспользоваться нашими услугами вы можете за {} монет\n'
+              'Согласны?\n'
+              'Да => 1\n'
+              'Нет => 2\n'.format(price_sleep[hero.statistics['location']]))
+        ans = input()
         if ans == '1':
             if hero.parameter['gold'] >= price_sleep[hero.statistics['location']]:
                 # тратятся деньги, причём индекс затрат равен параметру 'location' который берётся из статистики героя,
@@ -48,8 +55,6 @@ def recovery_all():
     """Восстановление потраченных параметров во время сна"""
     hero.heart_new(hero.parameter['heart_full'])
     # если игрок маг то восстанавливается вся магия путём установления нового значения
-    if 'magic' in hero.parameter:
-        hero.magic_recovery(hero.parameter['magic_full'])
 
 
 def test_lvl():
