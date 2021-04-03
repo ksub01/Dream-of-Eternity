@@ -6,7 +6,6 @@ import information
 import blacksmith
 import fight
 import hotel
-import sages
 import casino
 import inventory
 import hero
@@ -44,8 +43,6 @@ def playing_loop():
             casino.dialogue()
         elif choice == '5':
             inventory.start_inventory()
-        elif choice == '6':
-            sages.dialogue()
     else:
         if not hero.alive():
             information.end_game()

@@ -1,5 +1,5 @@
 """Место, где находятся все словари монстров"""
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 MESSAGE_DAMAGE = Fore.GREEN + Style.DIM
 MESSAGE_HEAL = Fore.MAGENTA + Style.BRIGHT

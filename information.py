@@ -2,7 +2,7 @@
 
 import hero
 import lvl_up
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 INVENTORY_MESSAGE = Fore.GREEN + Style.BRIGHT
 DIE_MASSAGE = Fore.RED + Style.BRIGHT
@@ -14,7 +14,7 @@ MENU_TOWN_MASSAGE = Fore.LIGHTBLUE_EX
 def pause():
     """Пауза после отображения текста, чтобы игрок успел прочитать"""
     input(HELP_MESSAGE + 'Нажмите Enter\n')  # задержка для того, чтобы игрок мог прочитать
-    print(Style.RESET_ALL)
+    print(Style.RESET_ALL, end='')
 
 
 def goodbye():
@@ -41,13 +41,8 @@ def parameters():
     print(Fore.RED + Style.BRIGHT + "❤ {}/{}".format(hero.parameter['heart'],
                                                      hero.parameter['heart_full']), end='  ')
     print(Fore.YELLOW + '🪙 {}'.format(hero.parameter['gold']), end='  ')
-
     if 'attack' in hero.parameter:
         print(Fore.BLUE + "⚔ {}".format(hero.parameter['attack']), end='  ')
-    if 'magic' in hero.parameter:
-        print(Fore.BLUE + '💧 {}/{}'.format(hero.parameter['magic_force'],
-                                            hero.parameter['magic_full']), end='  ')
-        print(Fore.CYAN + '✨ {}'.format(hero.parameter['magic_force']), end='  ')
     print(Fore.LIGHTBLUE_EX + Style.DIM + '👊 {}'.format(hero.parameter['force']), end='  ')
     print(Fore.LIGHTMAGENTA_EX + '🛡 {}'.format(hero.parameter['defence']), end='  ')
     print(Fore.GREEN + '🥾 {}'.format(hero.parameter['dexterity']), end='  ')
@@ -72,5 +67,4 @@ def town_places():
           'Отдохнуть в гостинице => 2\n'
           'Пойти в лес на охоту => 3\n'
           'Сыграть в рулетку => 4\n'
-          'Инвентарь = > 5\n'
-          'Получение заданий от основателей => 6')
+          'Инвентарь = > 5')
