@@ -32,6 +32,7 @@ def size_equipment():
 
 def equipment_show():
     """Показывает надетые вещи на игроке. Ничего не принимает и не возвращает"""
+    print(Fore.BLUE + '═'*40)
     if 'name' in equipment['sword']:
         print("🗡 «{}»\n⚔ ➔ {}\n"
               "➔"
@@ -57,6 +58,7 @@ def equipment_show():
               " {}\n".format(equipment['ring']['name'], equipment['ring']['property']))
     else:
         print("{:5} {:5}\n".format('💍', '❌'))
+    print(Fore.BLUE + '═'*40)
 
 
 def remove_thing(item, inventory_choice):
@@ -101,6 +103,7 @@ def show_things():
     all_things = inventory['sword'] + inventory['armor'] + inventory['cloak'] + inventory['ring']
     print('「Инвентарь 」\n')
     for (num, item) in zip(range(1, great_num), all_things):
+        print(Fore.GREEN + '┅' * 40)
         if item['class'] == 'sword':
             print("🗡 " + Fore.GREEN + Style.DIM + "«{}»\n".format(item['name']) + Style.RESET_ALL + "⚔ ➔ {}\n"
                   "➔"
@@ -118,6 +121,7 @@ def show_things():
             print("💍 «{}»\n"
                   "➔"
                   " {}\n".format(item['name'], item['property']))
+        print(Fore.GREEN + '┅' * 40)
 
 
 def put_on_thing():

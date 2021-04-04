@@ -1,5 +1,7 @@
 """Функция, в которой описывается механика боя"""
 
+from colorama import Fore, Style
+
 import hero
 import random
 import monsters
@@ -61,13 +63,15 @@ def start_fight(name, what_event):
     hero.skill_count_fill()
     hero.statistics_up_battle1()
     # начальное окно для оглашения начала боя, работает один раз
-    print("!" * 50, "                 Начинается бой", "!" * 50, sep='\n')
-    while hero.parameter['heart'] > 0 and name['heart'] > 0:
+    print(Style.RESET_ALL + '─'*50)
+    print(Fore.RED + "                 Начинается бой")
+    print('─'*50)
+    while hero.alive() and name['heart'] > 0:
         hero.skills_clear()
         information.parameters()
         monster_information(name)
-        print('Атака -> 1\n'
-              'Побег -> 2')
+        print('\n⚔  ➔ 1\n'
+              '🏃 ➔ 2')
         display_skills()
         choice = input()
         if choice == '1':
@@ -225,7 +229,6 @@ def rewards(name, event_dragon):
     Передаётся: словарь монстра, коэффицент опыта, множитель Озириса"""
     coefficient_gold, probability_chest, coefficient_exp = effects.before_award(name)
     effects.addition_reward(name)
-    effects.get_items(name)
     hero.gold_receive(int(name['gold'] * event_dragon * coefficient_gold))
     hero.statistics_up_gold(int(name['gold'] * event_dragon * coefficient_gold))
     hero.exp_receive(int(name['exp'] * coefficient_exp * event_dragon))
