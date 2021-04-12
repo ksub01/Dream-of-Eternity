@@ -10,11 +10,12 @@ import lvl_up
 
 
 MESSAGE_DAMAGE = Fore.RED + Style.BRIGHT
+MESSAGE_HEAL = Fore.RED
 
 
 # при выборе класса, один из этих словарей добавляется в параметры игрока
-parameter_lord = {'heart_full': 20, 'heart': 20, 'attack': 0, 'force': 3, 'defence_full': 0, 'defence': 0,
-                  'dexterity': 6, 'wisdom': 3, 'gold': 25, 'exp': 0, 'lvl': 1, 'name': 'Повелитель',
+parameter_lord = {'heart_full': 25, 'heart': 25, 'attack': 0, 'force': 4, 'defence_full': 0, 'defence': 0,
+                  'dexterity': 6, 'wisdom': 3, 'gold': 25, 'exp': 100, 'lvl': 1, 'name': 'Повелитель',
                   'sign': '🗡'}
 
 
@@ -40,13 +41,13 @@ statistics = {'location': 1, 'mission': 0, 'battle_in_location_1': 0, 'earned_go
 def gold_spending(gold):
     """В функцию подаём значение золота, которое игрок тратит"""
     parameter['gold'] -= gold
-    print('Вы потратили {} золота'.format(gold))
+    print(Fore.YELLOW + '-{} 🪙'.format(gold))
 
 
 def gold_receive(gold):
     """В функцию подаём значение золота, которое игрок получает"""
     parameter['gold'] += gold
-    print('Вы получили {} золота'.format(gold))
+    print(Fore.YELLOW + '+{} 🪙'.format(gold))
 
 
 def attack_new(attack):
@@ -117,7 +118,7 @@ def heart_new(heart):
 def heart_spend(heart):
     """В функцию подаём значение здоровья, которое игрок теряет"""
     parameter['heart'] -= heart
-    print(MESSAGE_DAMAGE + 'Вы потеряли {} здоровья'.format(heart))
+    print(MESSAGE_DAMAGE + '-{} ❤ '.format(heart))
 
 
 def heart_recovery(heart):
@@ -125,29 +126,16 @@ def heart_recovery(heart):
     ans = parameter['heart'] + heart
     if ans <= parameter['heart_full']:
         parameter['heart'] += heart
-        print('Вы восстановили {} здоровья'.format(heart))
+        print(MESSAGE_HEAL + '+{} ❤ '.format(heart))
     else:
-        print('Вы восстановили {} здоровья'.format(parameter['heart_full'] - parameter['heart']))
+        print(MESSAGE_HEAL + '+{} ❤ '.format(parameter['heart_full'] - parameter['heart']))
         parameter['heart'] = parameter['heart_full']
-
-
-if 'magic' in parameter:
-    def magic_recovery(magic):
-        """"В функцию подаём значение маны, которое игрок восстанавливает. Отображает разницу между прошлым и значением,
-        которое игрок получает, есть ограницение на восстановление"""
-        ans = parameter['magic'] + magic
-        if ans <= parameter['magic_full']:
-            parameter['magic'] += magic
-            print('Вы восстановили {} маны'.format(magic))
-        else:
-            print('Вы восстановили {} маны'.format(parameter['magic_full'] - parameter['magic']))
-            parameter['magic'] = parameter['magic_full']
 
 
 def exp_receive(exp):
     """В функцию подаём значение опыта, которое игрок получает"""
     parameter['exp'] += exp
-    print('Вы получили {} опыта'.format(exp))
+    print(Fore.BLUE + '+{} 📖'.format(exp))
 
 
 def mission_complete(mission):
@@ -190,7 +178,7 @@ def bonus_war_goblin():
 def heart_full_upgrade(heart):
     """Увеличивает количество максимального здоровья на данную велечину"""
     parameter['heart_full'] += heart
-    print('Ваше максмальное здоровье увеличилась на {}'.format(heart))
+    print('Ваше максимальное здоровье увеличилась на {}'.format(heart))
     information.pause()
 
 

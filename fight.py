@@ -1,6 +1,8 @@
 """Функция, в которой описывается механика боя"""
 
 from colorama import Fore, Style
+from progress.spinner import Spinner
+import time
 
 import hero
 import random
@@ -189,10 +191,29 @@ def attack_hero(name):
         pass
 
 
+def effect_hit_hero():
+    s = '{} {}{} '.format('🗡', Fore.GREEN, '')
+    spinner = Spinner(s)
+    for i in range(3):
+        time.sleep(0.1)
+        spinner.next()
+    print(end=' ')
+
+
+def effect_hit_monster():
+    s = '{}{} '.format('🐾', Fore.RED, '')
+    spinner = Spinner(s)
+    for i in range(3):
+        time.sleep(0.1)
+        spinner.next()
+    print(end=' ')
+
+
 def heroes_hit(name):
     """То как расчитывается урон героя. после чего включаются соответствующие эффекты. в будующем удар героя,
      как и монста будет проходить обработку, передаётся словарь монстра"""
     # разброс урона 0.8 - 1.2
+    effect_hit_hero()
     damage = int(effects.after_damage_in_monster(attack_hero(name)) * random.randint(8, 12) / 10)
     monsters.monster_spend_heart(name, damage)
     effects.past_damage_in_monster(name, damage)
@@ -202,6 +223,7 @@ def monsters_hit(name):
     """То как расчитывается урон монстра. урон монстра проходит обработу, после чего наносится по герою, после чего
      включаются соответствующие эффекты, передаётся словарь монстра"""
     # разброс урона 0.8 - 1.2
+    effect_hit_monster()
     damage = int(effects.after_damage_in_hero(attack_monster(name)) * random.randint(8, 12) / 10)
     hero.heart_spend(damage)
     effects.past_damage_in_hero(name)
@@ -232,6 +254,6 @@ def rewards(name, event_dragon):
     hero.gold_receive(int(name['gold'] * event_dragon * coefficient_gold))
     hero.statistics_up_gold(int(name['gold'] * event_dragon * coefficient_gold))
     hero.exp_receive(int(name['exp'] * coefficient_exp * event_dragon))
-    inventory.give_chest(1, 100, name['lvl'], probability_chest)
+    inventory.give_chest(1, 50, name['lvl'], probability_chest)
     hero.defence_load()
     information.pause()

@@ -5,7 +5,7 @@ import hero
 HELP_MESSAGE = Fore.CYAN + Style.DIM
 LVL_UP_MESSAGE = Fore.YELLOW + Style.BRIGHT
 passive_skills = ['Демонический облик']
-exp = [0, 50, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000, 1024000]
+exp = [0, 25, 50, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000, 1024000]
 
 
 def start():
@@ -21,19 +21,16 @@ def start():
 def parameter():
     """Вы выбираете характеристику, она повышается. Ничего не возвращает"""
     while True:
-        number_characteristic = int(input(LVL_UP_MESSAGE + 'Здоровье + {} -> 1\n'
-                                          'Сила + {} -> 2\n'
-                                          'Ловкость + {} -> 3\n'
-                                          'Мудрость + {} -> 4\n' + Style.RESET_ALL +
-                                          ''.format(10 * (hero.parameter['lvl'] - 1),
-                                                    2 * (hero.parameter['lvl'] - 1),
-                                                    3 * (hero.parameter['lvl'] - 1),
-                                                    4 * (hero.parameter['lvl'] - 1))))
+        print(LVL_UP_MESSAGE + 'Здоровье + {} -> 1'.format(14 * (hero.parameter['lvl'] - 1)))
+        print(LVL_UP_MESSAGE + 'Сила + {} -> 2'.format(3 * (hero.parameter['lvl'] - 1),))
+        print(LVL_UP_MESSAGE + 'Ловкость + {} -> 3'.format(3 * (hero.parameter['lvl'] - 1)))
+        print(LVL_UP_MESSAGE + 'Мудрость + {} -> 4'.format(4 * (hero.parameter['lvl'] - 1)) + Style.RESET_ALL)
+        number_characteristic = int(input())
         if number_characteristic == 1:
-            hero.heart_full_upgrade(10 * (hero.parameter['lvl'] - 1))
+            hero.heart_full_upgrade(14 * (hero.parameter['lvl'] - 1))
             break
         elif number_characteristic == 2:
-            hero.force_upgrade(2 * (hero.parameter['lvl'] - 1))
+            hero.force_upgrade(3 * (hero.parameter['lvl'] - 1))
             break
         elif number_characteristic == 3:
             hero.dexterity_upgrade(3 * (hero.parameter['lvl'] - 1))
