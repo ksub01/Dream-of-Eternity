@@ -25,17 +25,17 @@ def parameter():
         print(LVL_UP_MESSAGE + 'Сила + {} -> 2'.format(3 * (hero.parameter['lvl'] - 1),))
         print(LVL_UP_MESSAGE + 'Ловкость + {} -> 3'.format(3 * (hero.parameter['lvl'] - 1)))
         print(LVL_UP_MESSAGE + 'Мудрость + {} -> 4'.format(4 * (hero.parameter['lvl'] - 1)) + Style.RESET_ALL)
-        number_characteristic = int(input())
-        if number_characteristic == 1:
+        number_characteristic = input()
+        if number_characteristic == '1':
             hero.heart_full_upgrade(14 * (hero.parameter['lvl'] - 1))
             break
-        elif number_characteristic == 2:
+        elif number_characteristic == '2':
             hero.force_upgrade(3 * (hero.parameter['lvl'] - 1))
             break
-        elif number_characteristic == 3:
+        elif number_characteristic == '3':
             hero.dexterity_upgrade(3 * (hero.parameter['lvl'] - 1))
             break
-        elif number_characteristic == 4:
+        elif number_characteristic == '4':
             hero.wisdom_upgrade(4 * (hero.parameter['lvl'] - 1))
             break
         else:
@@ -47,52 +47,15 @@ def choice_skills():  # выбор скила
     Навык характеризуется списком следующим образом 1ая цифра - уровень прокачки навыка от 0 до 3,
     2ая цифра - прокачка эффекта во всех четырёх состояниях навыка: не прокачен, первого уровня, второго,
     третьего. 3ая цифра - то, под каким номером он выводился игроку"""
-    while True:
-        display_inf_skills()
-        if hero.parameter['name'] == 'Повелитель':
-            # переход в меню выбора навыка
-            choice_lord_skills()
-            break
+    display_inf_skills()
+    choice_skills()
+    number = int(input('Какой навык прокачать?\n'))
 
 
 def display_inf_skills():
     """Отображение вкаченных навыков и уровней прокачки для всех классов"""
-    if hero.parameter['name'] == 'Повелитель':
-        if 'Длань господа' in hero.nav_hero_have:
-            hand_of_god = hero.nav_hero_have['Длань господа'][0]
-        else:
-            hand_of_god = 0
-        print('1 Длань господа *{}*: вы наносите мощный удар, который в [5, 10, 15] раз\n'
-              'больше вашей атаки. Сила зависит от прокачки. Один раз за бой'.format(hand_of_god))
-
-        if 'Божественное провиденье' in hero.nav_hero_have:
-            divine_providence = hero.nav_hero_have['Божественное провиденье'][0]
-        else:
-            divine_providence = 0
-        print('2 Божественное провиденье *{}*: Увеличивает вашу атаку на [5, 10, 20]'
-              ''.format(divine_providence))
-
-        if 'Демонический облик' in hero.nav_hero_have:
-            demon_outlook = hero.nav_hero_have['Демонический облик'][0]
-        else:
-            demon_outlook = 0
-        print('3 Демонический облик *{}*: Ваша атака увеличивается в 2 раза,\n'
-              'но вы возвращаете [50, 40, 30] процентов урона себе'.format(demon_outlook))
-
-
-def choice_lord_skills():
-    """Выбор навыка лорда в зависимости от цифры. Передаётся цифра навыка, который игрок хочет вкачать"""
-    while True:
-        number = int(input('Какой навык прокачать?\n'))
-        if number == 1:
-            if upgrade_nav('Длань господа', [0, {1: 5, 2: 10, 3: 15}]) == 1:
-                break
-        elif number == 2:
-            if upgrade_nav('Божественное провиденье', [0, {1: 5, 2: 10, 3: 20}]) == 1:
-                break
-        elif number == 3:
-            if upgrade_nav('Демонический облик', [0, [50, 40, 30]]) == 1:
-                break
+    for perk in hero.skills:
+        print(hero.skills[perk]['info'])
 
 
 def upgrade_nav(name, grade):
