@@ -1,5 +1,6 @@
 """Основной модуль запуска программы, подготовка к запуску, настройка и игровой цикл"""
 from colorama import init
+import pygame
 
 import start
 import information
@@ -10,9 +11,16 @@ import casino
 import inventory
 import hero
 
-
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 # сброс параметров после каждого вывода
+pygame.init()
+size = [700, 500]
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption('Dream of Eternity')
+clock = pygame.time.Clock()
 init(autoreset=True)
+done = False
 
 
 def start_game():
@@ -49,6 +57,15 @@ def playing_loop():
 
 
 if __name__ == '__main__':
-    start_game()
-    setting()
-    playing_loop()
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+
+        start_game()
+        setting()
+        playing_loop()
+        screen.fill(BLACK)
+        pygame.display.flip()
+        clock.tick(20)
+        pygame.quit()
