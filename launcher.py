@@ -1,6 +1,7 @@
 """Основной модуль запуска программы, подготовка к запуску, настройка и игровой цикл"""
 from colorama import init
 
+
 import start
 import information
 import blacksmith

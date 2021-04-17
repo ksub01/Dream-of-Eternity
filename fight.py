@@ -3,7 +3,6 @@
 from colorama import Fore, Style
 from progress.spinner import Spinner
 import time
-import random
 
 import hero
 import random
@@ -21,178 +20,42 @@ def dungeon():
                                 'Вернуться => 2')
         if choice_location == '1':
             print("Вы попадаете в лес Смерти")
-            if hero.statistics['mission'] < 2:
-                # информация о наличие яда, пока не выполнена первая миссия, потом противоядие станет расходником
-                # покупаемым за деньги
-                print('Яд Варганиса мешает вам пройти вглубь, но способость героя Мрака позволяет находится у входа\n'
-                      'в лес, где концентрации яда минимальна, приличное время и без особых последствий')
-                # Три монстра на один уровень игрока
-                choice_monster = hero.parameter['lvl'] * 3
-                # заглушка на шесть монстров для того, чтобы не превысился порог монстров
-                if choice_monster > 6:
-                    choice_monster = 6
-                # рулетка по всем монстрам данной локации
-                what_monster = random.randint(1, choice_monster)
-                # запуск боя с монстром
-                gen_forest()
-                start_fight(monsters.monsters[what_monster], effects.dragon_time())
-                break
-            else:
-                break
+            # информация о наличие яда, пока не выполнена первая миссия, потом противоядие станет расходником
+            # покупаемым за деньги
+            print('Яд Варганиса мешает вам пройти вглубь, но способость героя Мрака позволяет находится у входа\n'
+                  'в лес, где концентрации яда минимальна, приличное время и без особых последствий')
+            # Три монстра на один уровень игрока
+            choice_monster = hero.parameter['lvl'] * 3
+            # заглушка на шесть монстров для того, чтобы не превысился порог монстров
+            if choice_monster > 6:
+                choice_monster = 6
+            # рулетка по всем монстрам данной локации
+            what_monster = random.randint(1, choice_monster)
+            # запуск боя с монстром
+            fighting(monsters.monsters[what_monster], effects.dragon_time())
+            break
         else:
             break
 
 
-class GoblinWar:
-    def __init__(self):
-        self.x = random.randint(0, 17)
-        self.y = random.randint(0, 29)
-        self.sign = '🐺'
-        pass
+def start_message():
+    """Стартовое сообщение перед началом боя"""
+    print(Style.RESET_ALL + '─'*50)
+    print(Fore.RED + "                 Начинается бой")
+    print('─'*50)
 
 
-class GoblinShaman:
-    def __init__(self):
-        self.x = random.randint(0, 17)
-        self.y = random.randint(0, 29)
-        self.sign = '🐯'
-        pass
-
-
-
-
-
-
-def gen_forest():
-    """Основная локация для путешествий"""
-    global location
-    location = [list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳'),
-                list('🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳')]
-    mob = []
-    box1 = random.randint(0, 17)
-    box2 = random.randint(0, 29)
-    for _ in range(100):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        location[box1][box2] = Fore.GREEN + '🪨'
-    for _ in range(700):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        location[box1][box2] = Fore.GREEN + '。'
-    for i in range(random.randint(7, 12)):
-        mob.append(GoblinWar())
-    for i in range(3, 4):
-        mob.append(GoblinShaman())
-    for i in mob:
-        location[i.x][i.y] = i.sign
-    for _ in range(3):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '💍'
-    for _ in range(6, 12):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '🪙'
-    for _ in range(1):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '🪦'
-
-    for _ in range(1):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '💎'
-    for _ in range(1):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '🐗'
-    for _ in range(8):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '🎁'
-    for _ in range(1):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        while tree(box1, box2):
-            box1 = random.randint(0, 17)
-            box2 = random.randint(0, 29)
-        location[box1][box2] = '🐉'
-    for line in location:
-        print(*line)
-
-
-"""def place(x, y, ob):
-    while tree(x, y):
-        box1 = random.randint(0, 17)
-        box2 = random.randint(0, 29)
-        location[box1][box2] = '💍'"""
-
-
-def tree(x, y):
-    """проверяет, что вокруг нет деревьев"""
-    for delta_x, delta_y in [(0, -1), (0, 1), (1, 0), (-1, 0)]:
-        x2, y2 = x+delta_x, y+delta_y
-        if 0 <= x2 <= 17 and 0 <= y2 <= 29 and location[x2][y2] == '🌳':
-            return -1
-    return 0
-
-
-def display_skills():
-    """Отображает навыки и предметы, которые герой может использовать. Навыки извлекаются из списка"""
-    for (number, skills_name) in zip(range(3, 100000000), hero.count_active_skills):
-        if hero.count_active_skills[skills_name] == 'full':
-            print(skills_name, '->', number)
-        else:
-            print(skills_name, '*{}*'.format(hero.count_active_skills[skills_name]), '->', number)
-
-
-def start_fight(name, what_event):
+def fighting(name, what_event):
     """Функция боя. Передаём словарь монстра и проверку на передачу силы Озириса лесу, которая тянется с самого начала
     программы. После действия атаки игра переходит или к награде или к смерти на главном игране"""
+
     # изменение состояния атаки и здоровья монстра под действием Озириса
     monsters.monster_heart_new(name, name['full_heart'] * what_event)
     monsters.monster_recovery_attack(name, name['full_attack'] * what_event)
     hero.defence_save(hero.parameter['defence'])
     hero.skill_count_fill()
     hero.statistics_up_battle1()
-    # начальное окно для оглашения начала боя, работает один раз
-    print(Style.RESET_ALL + '─'*50)
-    print(Fore.RED + "                 Начинается бой")
-    print('─'*50)
+    start_message()
     while hero.alive() and name['heart'] > 0:
         hero.skills_clear()
         information.parameters()
@@ -207,12 +70,9 @@ def start_fight(name, what_event):
         elif choice == '2':
             if escape(name) == 1:
                 break
-            else:
-                pass
         else:
             if choice.isdigit():
                 using_skills(int(choice), name)
-            pass
     else:
         if name['heart'] <= 0:
             hero.statistics_up_kill(1)
@@ -220,6 +80,15 @@ def start_fight(name, what_event):
         else:
             # в главное меню т.к. мёртвый
             pass
+
+
+def display_skills():
+    """Отображает навыки и предметы, которые герой может использовать. Навыки извлекаются из списка"""
+    for (number, skills_name) in zip(range(3, 100000000), hero.count_active_skills):
+        if hero.count_active_skills[skills_name] == 'full':
+            print(skills_name, '->', number)
+        else:
+            print(skills_name, '*{}*'.format(hero.count_active_skills[skills_name]), '->', number)
 
 
 def using_skills(number_skills, name_monster):
@@ -236,24 +105,16 @@ def using_skills(number_skills, name_monster):
 def monster_information(name):
     """Функция выдаёт всю инфрмацию о монстре при достаточной разнице в мудрости: равенство, больше на 5, больше на 10
     Передаётся: словарь монстра"""
-    print(name['name'] + ' 🐺')
+    print(Fore.RED + name['name'] + ' 🐺')
     if hero.parameter['wisdom'] >= name['wisdom']:
         print("Уровень: {}".format(name['lvl']))
-    else:
-        print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 5:
         print("🖤: {}\nАтака: {}".format(name['heart'], name['attack']))
-    else:
-        print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 10:
         print("⛨: {}\nЛовкость: {}".format(name['defence'],
                                            name['dexterity']))
-    else:
-        print("?" * 10)
     if hero.parameter['wisdom'] >= name['wisdom'] + 15:
         print(name['property'])
-    else:
-        print("?" * 10)
 
 
 def who_first_attack(name):
@@ -311,9 +172,7 @@ def attack_hero(name):
         if damage < 1:
             damage = 1
         return damage
-    else:
-        print('Не предусмотрено других классов')
-        pass
+
 
 
 def effect_hit_hero():
