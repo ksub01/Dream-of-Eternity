@@ -1,17 +1,14 @@
 """Все функции для казино в городе"""
 
-from colorama import Fore, Style, init
+from colorama import Fore, Style
 
-import hero
+from player import heroes
 import random
 import information
 
 TOWN_MESSAGE = Style.DIM + Fore.LIGHTYELLOW_EX
 MESSAGE_DIALOGUE = Fore.GREEN
 HELP_MESSAGE = Fore.CYAN + Style.DIM
-
-init(autoreset=True)
-
 
 def dialogue():
     """Функция для выбора миниигры в рулетке, в которую хочет сыграть игрок и запуска её"""
@@ -51,18 +48,15 @@ def gold_jackpot():
                      'Введите количество золота, которое вы ставите\n'
                      'Выход ➔ 0\n')
         if gold.isdigit() and gold != '0':
-            if hero.parameter['gold'] >= int(gold):
-                gold = int(gold)
-                hero.gold_spending(gold)
+            gold = int(gold)
+            if heroes.goldspending(gold):
                 print(HELP_MESSAGE + 'Игра начинается\n'
                       'Итак выпало...')
                 information.pause()
                 win_gold = random.randint(0, gold * 2)
                 print(Fore.YELLOW + '*' + str(win_gold) + '*')
-                hero.gold_receive(win_gold)
+                heroes.gold_receive(win_gold)
                 information.pause()
-            else:
-                information.not_enough_money()
         elif gold == '0':
             information.goodbye()
             break

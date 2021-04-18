@@ -2,9 +2,8 @@
 
 from colorama import Fore, Style
 
-
-import hero
 import information
+import player
 
 STORY_MESSAGE = Fore.YELLOW + Style.DIM
 
@@ -47,5 +46,5 @@ def choice_class():
         choice = input(Style.RESET_ALL + Fore.YELLOW + 'Повелитель ➔ 1 (воин, владеющий силой и уничтожающий '
                        'монстров мечом)\n')
         if choice == '1':
-            hero.parameter_choice(hero.parameter_lord)
+            player.make_hero(player.Overlord)
             break

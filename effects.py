@@ -2,7 +2,7 @@
 
 
 import random
-import hero
+import player
 import inventory
 import monsters
 import information
@@ -37,18 +37,18 @@ def calc_heal_power():
 def after_fight(name):
     """Действия, которые происходят перед самим боем, при встрече монстра, после сохранения защиты и только один раз"""
     if name['name'] == 'Гоблин Убийца':
-        hero.parameter['defence'] = 0
+        player.parameter['defence'] = 0
     if inventory.equipment['ring'] != {} and inventory.equipment['ring']['name'] == \
             'Кольцо настоящего мужчины':
-        hero.heart_recovery(10)
+        player.heart_recovery(10)
 
 
 def after_damage_in_monster(damage):
     """Модификация урона предметами и скилами перед ударом. Возвращает урон"""
-    if 'Длань господа' in hero.active_this_hit:
+    if 'Длань господа' in player.active_this_hit:
         damage = damage * \
-                 hero.nav_hero_have['Длань господа'][1][hero.nav_hero_have['Длань господа'][0]]
-    if 'Демонический облик' in hero.active_this_hit:
+                 player.nav_hero_have['Длань господа'][1][player.nav_hero_have['Длань господа'][0]]
+    if 'Демонический облик' in player.active_this_hit:
         damage = damage * 2
     return damage
 
@@ -72,7 +72,7 @@ def past_damage_in_monster(name, damage_hero_in_monster):
     if inventory.equipment['sword'] != {} and inventory.equipment['sword']['name'] == 'Меч чести':
         # повышение защиты в бою после каждой атаки, для этого как раз защита и сохранялась
         if random.randint(1, 10) <= 2:
-            hero.defence_receive(1)
+            player.defence_receive(1)
 
     if inventory.equipment['sword'] != {} and inventory.equipment['sword']['name'] ==\
             'Меч алхимика':
@@ -85,11 +85,11 @@ def past_damage_in_monster(name, damage_hero_in_monster):
         print('Гоблин усмирён')
 
     if inventory.equipment['sword'] != {} and inventory.equipment['sword']['name'] == "Меч горя":
-        hero.heart_recovery(int(damage_hero_in_monster * 0.1 * heal_power))
+        player.heart_recovery(int(damage_hero_in_monster * 0.1 * heal_power))
 
-    if 'Демонический облик' in hero.active_this_hit:
-        hero.heart_spend(int(damage_hero_in_monster * hero.nav_hero_have['Демонический облик'][1][
-                                             hero.nav_hero_have['Демонический облик'][0]] / 100))
+    if 'Демонический облик' in player.active_this_hit:
+        player.heart_spend(int(damage_hero_in_monster * player.nav_hero_have['Демонический облик'][1][
+                                             player.nav_hero_have['Демонический облик'][0]] / 100))
 
 
 def past_damage_in_hero(name):
@@ -106,7 +106,7 @@ def past_damage_in_hero(name):
 
     if name['name'] == 'Змея Варганиса':
         # змея отравляет на 20 процентов, перед каждым ударом
-        hero.heart_spend(int(hero.parameter['heart'] * 0.2))
+        player.heart_spend(int(player.parameter['heart'] * 0.2))
     if name['name'] == 'Култист Озириса':
         # культист крадёт одну из четырёх экипированных вещей
         item = random.randint(1, 12)
@@ -127,18 +127,18 @@ def past_damage_in_hero(name):
             pass
     if inventory.equipment['armor'] != {} and inventory.equipment['armor']['name'] ==\
             'Доспехи лекаря':
-        hero.heart_recovery(int(1 * heal_power))
+        player.heart_recovery(int(1 * heal_power))
 
     if inventory.equipment['cloak'] != {} and inventory.equipment['cloak']['name']\
             == 'Плащ регенерации':
-        hero.heart_recovery(int(3 * heal_power))
+        player.heart_recovery(int(3 * heal_power))
 
 
 def addition_reward(name):
     """Обрабатывает статистику перед получением наград и делает дополнительные действия: например выдаёт награду за
     1000 убитых монстров, запускает уникальные события, получает словарь"""
     if name['name'] == 'Гоблин Воин':
-        hero.bonus_war_goblin()
+        player.bonus_war_goblin()
 
 
 def before_award(monster):

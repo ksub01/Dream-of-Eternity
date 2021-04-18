@@ -1,6 +1,6 @@
 from colorama import Fore, Style
 
-import hero
+import player
 import items
 import random
 import information
@@ -194,7 +194,7 @@ def put_on_sword(sword_for_put_on):
         take_off_sword()
     if 'attack' in sword_for_put_on:
         # игрок надевает вещь и получает бонус к атаке
-        hero.attack_receive(sword_for_put_on['attack'])
+        player.attack_receive(sword_for_put_on['attack'])
     equipment['sword'] = sword_for_put_on
     remove_thing(sword_for_put_on, inventory['sword'])
 
@@ -204,7 +204,7 @@ def put_on_armor(armor_for_put_on):
     if 'name' in equipment['armor'] and equipment['armor']['name'] != '':
         take_off_armor()
     if 'defence' in armor_for_put_on:
-        hero.defence_receive(armor_for_put_on['defence'])
+        player.defence_receive(armor_for_put_on['defence'])
     equipment['armor'] = armor_for_put_on
     remove_thing(armor_for_put_on, inventory['armor'])
 
@@ -249,7 +249,7 @@ def take_off_sword():
     """Функция снятия меча в инвентаре"""
     if 'name' in equipment['sword'] and equipment['sword']['name'] != '':
         give_sword(equipment['sword'])
-        hero.attack_lose(equipment['sword']['attack'])
+        player.attack_lose(equipment['sword']['attack'])
         # equipment содержит словари надетых вещей
         equipment['sword'] = {}
 
@@ -258,7 +258,7 @@ def take_off_armor():
     """Функция снятия брони в инвентаре"""
     if 'name' in equipment['armor'] and equipment['armor']['name'] != '':
         give_armor(equipment['armor'])
-        hero.defence_lose(equipment['armor']['defence'])
+        player.defence_lose(equipment['armor']['defence'])
         equipment['armor'] = {}
 
 
@@ -305,7 +305,7 @@ def give_ring(ring):
 def lose_sword():
     """Герой теряет надетый меч"""
     if 'name' in equipment['sword'] and equipment['sword']['name'] != '':
-        hero.attack_lose(equipment['sword']['attack'])
+        player.attack_lose(equipment['sword']['attack'])
         equipment['sword'] = {}
     print('Вы потеряли надетый меч')
 
@@ -313,7 +313,7 @@ def lose_sword():
 def lose_armor():
     """Функция потери надетой брони"""
     if 'name' in equipment['armor'] and equipment['armor']['name'] != '':
-        hero.defence_lose(equipment['armor']['defence'])
+        player.defence_lose(equipment['armor']['defence'])
         equipment['armor'] = {}
         print('Вы потеряли вашу броню')
     print('Вы потеряли надетую броню')

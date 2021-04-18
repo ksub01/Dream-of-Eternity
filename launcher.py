@@ -9,7 +9,7 @@ import fight
 import hotel
 import casino
 import inventory
-import hero
+from player import heroes
 
 
 def start_game():
@@ -25,8 +25,8 @@ def setting():
 
 def playing_loop():
     """Основной цикл игры, с действиями внутри города и боями"""
-    while hero.alive():
-        information.parameters()
+    while heroes.alive():
+        heroes.parameters()
         information.town_places()
         information.if_lvl_up()
         choice = input()
@@ -41,7 +41,7 @@ def playing_loop():
         elif choice == '5':
             inventory.start_inventory()
     else:
-        if not hero.alive():
+        if not heroes.alive():
             information.end_game()
 
 

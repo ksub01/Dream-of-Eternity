@@ -3,136 +3,37 @@
 from colorama import Fore, Style
 
 import inventory
-import items
+import world
 import fight
 import information
 import lvl_up
 
-
-class Creature:
-    """живое создание"""
-
-    def __init__(self):
-        self.heart = 0
-        self.attack = 0
-        self.force = 0
-        self.defence = 0
-        self.dexterity = 0
-        self.wisdom = 0
-        self.lvl = 0
-        self.exp = 0
-        self.gold = 0
+MESSAGE_DAMAGE = Fore.GREEN + Style.DIM
+MESSAGE_HEAL = Fore.MAGENTA + Style.BRIGHT
 
 
-class Hero(Creature):
+
+
+def make_hero(cls):
+    global heroes
+    global flag
+    heroes = cls()
+    flag = 0
+
+
+class Hero(world.Creature):
     """герой"""
 
     def __init__(self):
         super().__init__()
         self.lvl = 1
+        self.target = ''
+        self.skills = []
+        self.exp_to_lvl = [0, 25, 50, 100, 500, 2500, 7500, 17000, 26000, 52000, 104000, 208000, 512000, 1024000]
 
-    def gold_spending(self, gold):
-        """В фукнцию передаем значение золота, которое тратит игрок, возвращает, получится потратить или нет"""
-        # если золота достаточно
-        if self.gold >= gold:
-            print(Fore.YELLOW + 'Вы потратили {}🪙 золота '.format(gold))
-            self.gold -= gold
-            return 1
-        else:
-            print('У вас недостаточно золота')
-            return 0
-
-    def gold_receive(self, gold):
-        """В функцию подаём значение золота, которое игрок получает"""
-        parameter['gold'] += self.gold
-        print(Fore.YELLOW + '+{} 🪙'.format(gold))
-
-    def attack_new(self, attack):
-        """Герой получает данное количество атаки, предыдущее значение нигде не сохраняется"""
-        ans = self.attack - attack
-        if ans > 0:
-            print('Ваша атака уменьшилась на {}'.format(ans))
-        elif ans == 0:
-            print('Ваша атака не изменилась')
-        else:
-            print('Ваша атака увеличилась на {}'.format(-ans))
-        self.attack = attack
-
-    def attack_receive(self, attack):
-        """В функцию подаём значение атаки, которое игрок получает"""
-        self.attack += attack
-        print('Вы получили {} атаки'.format(attack))
-
-    def attack_lose(attack):
-        """Герой теряет данное количество атаки, предыдущее значение нигде не сохраняется"""
-        parameter['attack'] -= attack
-        print('Ваша атака уменьшилась на {}'.format(attack))
-
-
-    def defence_receive(defence):
-        """Увеличивает на заданную величину броню игрока. Эффект от функции в бою работает только во время текущего боя"""
-        parameter['defence'] += defence
-        print('Защита повышена на {}'.format(defence))
-
-
-    def defence_new(defence):
-        """Герой получает данное количество брони, предыдущее значение нигде не сохраняется"""
-        ans = parameter['defence'] - defence
-        if ans > 0:
-            print('Ваша защита увеличилась на {}'.format(parameter['defence'] - defence))
-        else:
-            print('Ваша защита уменьшилась на {}'.format(defence - parameter['defence']))
-        parameter['defence'] = defence
-
-
-    def defence_lose(defence):
-        """Герой теряет данное количество брони, предыдущее значение нигде не сохраняется"""
-        parameter['defence'] -= defence
-        print('Вы потеряли {} брони'.format(defence))
-
-
-    def defence_save(defence_hero):
-        """Сохраняет значение защиты перед боем в параметрах героя"""
-        parameter['full_defence'] = defence_hero
-
-
-    def defence_load():
-        """Функция загружает значение брони, т.к. оно могло изменяться во время боя"""
-        parameter['defence'] = parameter['full_defence']
-
-
-    def heart_new(heart):
-        """В функцию подаём значение здоровья, которое становится у игрока. Отображает разницу между прошлым и будующим
-        здоровьем"""
-        ans = heart - parameter['heart']
-        if ans >= 0:
-            print('Ваша здоровье увеличилась на {}'.format(heart - parameter['heart']))
-        else:
-            print('Ваша здоровье уменьшилась на {}'.format(parameter['heart'] - heart))
-        parameter['heart'] = heart
-
-
-    def heart_spend(heart):
-        """В функцию подаём значение здоровья, которое игрок теряет"""
-        parameter['heart'] -= heart
-        print(MESSAGE_DAMAGE + '-{} ❤ '.format(heart))
-
-
-    def heart_recovery(heart):
-        """В функцию подаём значение здоровья, которое игрок восстанавливает"""
-        ans = parameter['heart'] + heart
-        if ans <= parameter['heart_full']:
-            parameter['heart'] += heart
-            print(MESSAGE_HEAL + '+{} ❤ '.format(heart))
-        else:
-            print(MESSAGE_HEAL + '+{} ❤ '.format(parameter['heart_full'] - parameter['heart']))
-            parameter['heart'] = parameter['heart_full']
-
-
-    def exp_receive(exp):
-        """В функцию подаём значение опыта, которое игрок получает"""
-        parameter['exp'] += exp
-        print(Fore.BLUE + '+{} 📖'.format(exp))
+    def new_name(self):
+        """Выбор имени"""
+        self.target = input()
 
 
 class Overlord(Hero):
@@ -140,13 +41,18 @@ class Overlord(Hero):
 
     def __init__(self):
         super().__init__()
+        self.lvl = 1
+        self.full_heart = 25
         self.heart = 25
+        self.full_force = 25
         self.force = 4
+        self.full_dexterity = 25
         self.dexterity = 6
+        self.full_wisdom = 25
         self.wisdom = 3
         self.gold = 25
         self.sign = '🗡'
-        self.name = 'Повелитель'
+        self.cls = 'Повелитель'
         self.skills = []
 
 
@@ -188,24 +94,6 @@ class DemonicFury(Skill):
         self.influence = 'Ваша атака увеличивается в 2 раза, но вы возвращаете часть урона себе'
 
 
-class GoblinWarrior(Creature):
-    """Гоблин воин"""
-
-    def __init__(self):
-        super().__init__()
-        self.heart = 50
-        self.force = 2
-        self.dexterity = 5
-        self.wisdom = 10
-        self.lvl = 1
-        self.gold = 10
-        self.exp = 5
-        self.sign = '🐺'
-        self.name = 'Гоблин Воин'
-        self.skills = []
-        self.property = 'Убив тысячу, вы получаете меч Горя'
-
-
 class Statistics:
     """Статистика"""
 
@@ -213,6 +101,18 @@ class Statistics:
         self.battle = 0
         self.earned_gold = 0
         self.kill_monsters = 0
+
+    def gold(self, gold):
+        """Вы задаёте количество золото, которое вы заработали, для увеличения статистики"""
+        self.earned_gold += gold
+
+    def battles(self, battle):
+        """Увеличивает счётчик боёв на первой локации"""
+        self.battle += battle
+
+    def kill(self, kills):
+        """Увеличивает количество убитых противников в статистике на kills"""
+        self.kill += kills
 
 
 class Quests:
@@ -222,13 +122,20 @@ class Quests:
         # для уникального Меча горя
         self.war_goblin = 0
 
+    def bonus_war_goblin(self, goblins):
+        """Учитывает количество убитых гоблинов воинов, чтобы выдать меч при тысячи"""
+        self.war_goblin += 1
+        if self.war_goblin == 1000:
+            # НЕАВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВВЫОЛДВАОВЫДАОВЫДАЛОЫВДЛАОЫВДЛОАДЛ
+            pass
 
-MESSAGE_DAMAGE = Fore.RED + Style.BRIGHT
-MESSAGE_HEAL = Fore.RED
+
+
+
+
 
 skills_have_lord = {'Длань Господа': 0, 'Демоническая ярость': 0, 'Божественное провиденье': 0}
-# то, что заполняется при старте игры одним из словарей ниже
-parameter = {}
+
 skills = {}
 
 # для заполнения навыками игроками во время прокачки навыков. Заполняется имя + словарь
@@ -239,12 +146,9 @@ count_active_skills = {}
 # активные в данный удар навыки
 active_this_hit = []
 
-
-
-def mission_complete(mission):
-    """Функция, которая изменяет прогресс игрока по игровому квест, меняя его значение в статистике
-    Передаётся: значение новой миссии"""
-    statistics['mission'] = mission
+flag = 1
+if flag:
+    heroes = Overlord()
 
 
 def parameter_choice(what_parameter):
@@ -255,55 +159,19 @@ def parameter_choice(what_parameter):
     print('Вы выбрали класс {}'.format(what_parameter['name']))
 
 
-def statistics_up_gold(gold):
-    """Вы задаёте количество золото, которое вы заработали, для увеличения статистики"""
-    statistics['earned_gold'] += gold
 
 
-def statistics_up_battle1():
-    """Увеличивает счётчик боёв на первой локации"""
-    statistics['battle_in_location_1'] += 1
 
 
-def statistics_up_kill(num):
-    """Увеличивает количество убитых противников в статистике на num"""
-    statistics['kill'] += num
 
 
-def bonus_war_goblin():
-    """Учитывает количество убитых гоблинов воинов, чтобы выдать меч при тысячи"""
-    statistics['war_goblin'] += 1
-    if statistics['war_goblin'] == 1000:
-        print('Вы получили Меч горя')
-        inventory.give_sword(items.rare_swords[500])
 
 
-def heart_full_upgrade(heart):
-    """Увеличивает количество максимального здоровья на данную велечину"""
-    parameter['heart_full'] += heart
-    print('Ваше максимальное здоровье увеличилась на {}'.format(heart))
-    information.pause()
 
 
-def force_upgrade(force):
-    """Увеличивает количество силы игрока на данную велечину"""
-    parameter['force'] += force
-    print('Ваша сила увеличилась на {}'.format(force))
-    information.pause()
 
 
-def dexterity_upgrade(dexterity):
-    """Увеличивает количество ловкости игрока на данную велечину"""
-    parameter['dexterity'] += dexterity
-    print('Ваша ловкость увеличилась на {}'.format(dexterity))
-    information.pause()
 
-
-def wisdom_upgrade(wisdom):
-    """Увеличивает количество мудрости игрока на данную велечину"""
-    parameter['wisdom'] += wisdom
-    print('Ваша мудрость увеличилась на {}'.format(wisdom))
-    information.pause()
 
 
 def get_lvl(num):
@@ -398,5 +266,3 @@ def use_skill(name_skills, monster, value):
         print('Навык нельзя больше использовать')
 
 
-def alive():
-    return parameter['heart'] > 0

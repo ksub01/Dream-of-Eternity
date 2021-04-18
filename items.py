@@ -1,7 +1,7 @@
 """Модуль, в котором перечислены все предметы, которые может одеть игрок и функция открытия сундуков."""
 import random
 import inventory
-import hero
+import player
 import information
 
 
@@ -23,8 +23,8 @@ def chest_open(num):
         inventory.give_ring(rare_ring[num])
     else:
         # игрок получает количество золота, помноженное на уровень, если предмета не выпало
-        get_gold = throw * hero.parameter['lvl']
-        hero.gold_receive(get_gold)
+        get_gold = throw * player.parameter['lvl']
+        player.gold_receive(get_gold)
     # пауза при любом исходе
     information.pause()
 

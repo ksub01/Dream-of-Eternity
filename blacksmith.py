@@ -1,5 +1,5 @@
 """Покупка, продажа и улучшение оружия"""
-import hero
+import player
 import inventory
 import items
 import information
@@ -8,8 +8,8 @@ import information
 def get_item(item, discount):
     """Проверяет, хватает ли у игрока денег, если да, то добавляет данный предмет в инвентарь.
     Принимает: предмет и модификатор цены"""
-    if hero.parameter['gold'] >= int(item['gold'] * discount):
-        hero.gold_spending(int(item['gold'] * discount))
+    if player.parameter['gold'] >= int(item['gold'] * discount):
+        player.gold_spending(int(item['gold'] * discount))
         inventory.give_thing(item)
         print('Спасибо за покупку\n')
         information.pause()
@@ -32,7 +32,7 @@ def dialogue():
         discount = calc_discount()  # в десятых долях от целой части
         choice_division = showcase()
         # выбор зависит от класса
-        if choice_division == '1' and hero.parameter['name'] == 'Повелитель':
+        if choice_division == '1' and player.parameter['name'] == 'Повелитель':
             display_sword(discount)
             print('Купить -> 1\nУйти -> 2\n')
             choice = input()
@@ -112,7 +112,7 @@ def showcase():
 def display_sword(discount):
     """Отображает мечи доступные в магазине соответствующие уровню"""
     for key in items.swords_shop:
-        if hero.parameter['lvl'] >= items.swords_shop[key]['lvl']:
+        if player.parameter['lvl'] >= items.swords_shop[key]['lvl']:
             print('{} <{}> Атака <{}> Цена *{}* \n'
                   'Особое свойство <<{}>>\nУровень {}\n'
                   ''.format(key, items.swords_shop[key]['name'],
@@ -125,7 +125,7 @@ def display_sword(discount):
 def display_armor(discount):
     """Отображает броню доступную в магазине соответствующую уровню"""
     for key in items.armor_shop:
-        if hero.parameter['lvl'] >= items.armor_shop[key]['lvl']:
+        if player.parameter['lvl'] >= items.armor_shop[key]['lvl']:
             print('{} <{}> Броня <{}> Цена *{}* \n'
                   'Особое свойство <<{}>>\nУровень {}\n'
                   ''.format(key, items.armor_shop[key]['name'],
@@ -138,7 +138,7 @@ def display_armor(discount):
 def display_cloak(discount):
     """Отображает мечи доступные в магазине соответствующие уровню"""
     for key in items.cloak_shop:
-        if hero.parameter['lvl'] >= items.cloak_shop[key]['lvl']:
+        if player.parameter['lvl'] >= items.cloak_shop[key]['lvl']:
             print('{} <{}> Цена *{}* \n'
                   'Особое свойство <<{}>>\nУровень {}\n'
                   ''.format(key, items.cloak_shop[key]['name'],
@@ -151,7 +151,7 @@ def display_ring(discount):
     """Отображает кольца доступные в магазине соответствующие уровню"""
     for key in items.ring_shop:
         # проверка, чтобы отображались предметы не выше уровня героя
-        if hero.parameter['lvl'] >= items.ring_shop[key]['lvl']:
+        if player.parameter['lvl'] >= items.ring_shop[key]['lvl']:
             print('{} <{}> Цена *{}* \n'
                   'Особое свойство <<{}>>\nУровень {}\n'
                   ''.format(key, items.ring_shop[key]['name'],
@@ -165,7 +165,7 @@ def buy_sword(choice_sword, discount):
     choice_sword = int(choice_sword)
     for sword_number in items.swords_shop:
         if sword_number == choice_sword:
-            print('Ваше золото: {}'.format(hero.parameter['gold']))
+            print('Ваше золото: {}'.format(player.parameter['gold']))
             print('Вы точно хотите купить <{}>?\nАтака <{}> Цена *{}*\n'
                   'Особое свойство: <<{}>>\nУровень {}\n'
                   'Да -> 1 Нет -> 2\n'.format(items.swords_shop[sword_number]['name'],
@@ -184,7 +184,7 @@ def buy_armor(choice_armor, discount):
     choice_armor = int(choice_armor)
     for armor_number in items.armor_shop:
         if armor_number == choice_armor:
-            print('Ваше золото: {}'.format(hero.parameter['gold']))
+            print('Ваше золото: {}'.format(player.parameter['gold']))
             print('Вы точно хотите купить <{}>?\nБроня <{}> Цена *{}*\n'
                   'Особое свойство: <<{}>>\nУровень {}\n'
                   'Да -> 1 Нет -> 2\n'.format(items.armor_shop[armor_number]['name'],
@@ -203,7 +203,7 @@ def buy_cloak(choice_cloak, discount):
     choice_cloak = int(choice_cloak)
     for cloak_number in items.cloak_shop:
         if cloak_number == choice_cloak:
-            print('Ваше золото: {}'.format(hero.parameter['gold']))
+            print('Ваше золото: {}'.format(player.parameter['gold']))
             print('Вы точно хотите купить <{}>?\nЦена *{}*\n'
                   'Особое свойство: <<{}>>\nУровень {}\n'
                   'Да -> 1 Нет -> 2\n'.format(items.cloak_shop[cloak_number]['name'],
@@ -220,7 +220,7 @@ def buy_ring(choice_ring, discount):
     choice_ring = int(choice_ring)
     for ring_number in items.ring_shop:
         if ring_number == choice_ring:
-            print('Ваше золото: {}'.format(hero.parameter['gold']))
+            print('Ваше золото: {}'.format(player.parameter['gold']))
             print('Вы точно хотите купить <{}>?\nЦена *{}*\n'
                   'Особое свойство: <<{}>>\nУровень {}\n'
                   'Да -> 1 Нет -> 2\n'.format(items.ring_shop[ring_number]['name'],

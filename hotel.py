@@ -3,7 +3,7 @@
 
 from colorama import Fore, Style
 
-import hero
+from player import heroes
 import lvl_up
 import information
 
@@ -26,18 +26,14 @@ def dialogue():
                     ' {} монет\n'
                     'Согласны?\n'
                     'Да ➔ 1\n'
-                    'Нет ➔ 2\n'.format(price_sleep[hero.statistics['location']]))
+                    'Нет ➔ 2\n'.format(price_sleep[1]))
         if ans == '1':
-            if hero.parameter['gold'] >= price_sleep[hero.statistics['location']]:
+            if heroes.gold_spending(price_sleep[1]):
                 # тратятся деньги, причём индекс затрат равен параметру 'location' который берётся из статистики героя,
                 # важно учесть что он начинается с единицы
-                gold = price_sleep[hero.statistics['location']]
-                hero.gold_spending(gold)
                 sleep()
                 information.goodbye()
                 break
-            else:
-                information.not_enough_money()
         elif ans == '2':
             information.goodbye()
             break
@@ -53,8 +49,8 @@ def sleep():
 
 def recovery_all():
     """Восстановление потраченных параметров во время сна"""
-    need_heal = hero.parameter['heart_full'] - hero.parameter['heart']
-    hero.heart_recovery(need_heal)
+    need_heal = heroes.heart_full - heroes.heart
+    heroes.heart_recovery(need_heal)
     # если игрок маг то восстанавливается вся магия путём установления нового значения
 
 
@@ -62,7 +58,7 @@ def test_lvl():
     """Проверка опыта для поднятия уровня во время сна и поднятие уровня"""
     # если опыта больше чем в массиве с количеством опыта для следующего уровня, то уровень повышается
     # опыт не сбрасывается с повышением, позиция для нужного количества опыта соответствует текущему уровню игрока
-    if hero.parameter['exp'] >= lvl_up.exp[hero.parameter['lvl']]:
+    if heroes.exp >= heroes.exp_to_lvl[heroes.lvl]:
         # повышение характеристик
         lvl_up.start()
         # повышение уровня навыка
