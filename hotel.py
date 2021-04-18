@@ -49,8 +49,8 @@ def sleep():
 
 def recovery_all():
     """Восстановление потраченных параметров во время сна"""
-    need_heal = heroes.heart_full - heroes.heart
-    heroes.heart_recovery(need_heal)
+    need_heal = heroes.full_heart - heroes.heart
+    heroes.heart_new(need_heal)
     # если игрок маг то восстанавливается вся магия путём установления нового значения
 
 

@@ -60,6 +60,7 @@ class Creature:
     def parameters(self):
         """Отражение параметров героя в зависимости от выбранного класса героя"""
         print(Style.RESET_ALL + '─' * 40)
+        print(self.target)
         print(Fore.WHITE + Style.BRIGHT + "Уровень {}".format(self.lvl), end='  ')
         print(Fore.MAGENTA + self.sign)
         self.progress_hp()

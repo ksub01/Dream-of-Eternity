@@ -26,6 +26,9 @@ def setting():
 def playing_loop():
     """Основной цикл игры, с действиями внутри города и боями"""
     while heroes.alive():
+        print('Текущее имя' + heroes.target)
+        # проблема выбора имени и выбора из трехклассов, а не из одного
+        # проблема с присвоением и изменением экземпляров классов в других модулях
         heroes.parameters()
         information.town_places()
         information.if_lvl_up()

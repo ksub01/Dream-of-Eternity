@@ -12,13 +12,10 @@ MESSAGE_DAMAGE = Fore.GREEN + Style.DIM
 MESSAGE_HEAL = Fore.MAGENTA + Style.BRIGHT
 
 
-
-
 def make_hero(cls):
     global heroes
-    global flag
+    print('новый экземпляр во внутреннем файле')
     heroes = cls()
-    flag = 0
 
 
 class Hero(world.Creature):
@@ -146,9 +143,7 @@ count_active_skills = {}
 # активные в данный удар навыки
 active_this_hit = []
 
-flag = 1
-if flag:
-    heroes = Overlord()
+
 
 
 def parameter_choice(what_parameter):
@@ -265,4 +260,5 @@ def use_skill(name_skills, monster, value):
     else:
         print('Навык нельзя больше использовать')
 
-
+print('новый экземпляр во внешнем файле')
+heroes = Overlord()
