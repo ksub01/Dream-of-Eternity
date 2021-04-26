@@ -5,28 +5,6 @@ import player
 import information
 
 
-def chest_open(num):
-    """Функция открытия сундука, которая добавляет сундук в инвентарь героя. На вход функции подаётся уровень
-    получаемого сунука. Функция при первых значениях добавляет предмет в инвентарь, а при меньших добавляет золото,
-    количество которого зависит от уровня героя, причём предмет, доставаемый из сундука, находится в специальном словаре
-    под номером, совпадающим с уровнем сундука. Для каждого из четырёх типов предметов своё ветвление
-    Подаётся: уровень сундука"""
-    # вычисление вероятности
-    throw = random.randint(1, 25)
-    if throw == 1:
-        inventory.give_sword(rare_swords[num])
-    elif throw == 2:
-        inventory.give_armor(rare_armor[num])
-    elif throw == 3:
-        inventory.give_cloak(rare_cloak[num])
-    elif throw == 4:
-        inventory.give_ring(rare_ring[num])
-    else:
-        # игрок получает количество золота, помноженное на уровень, если предмета не выпало
-        get_gold = throw * player.parameter['lvl']
-        player.gold_receive(get_gold)
-    # пауза при любом исходе
-    information.pause()
 
 
 """Мечи, которые можно купить в магазине"""
