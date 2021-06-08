@@ -1,6 +1,6 @@
 """Основной модуль запуска программы, подготовка к запуску, настройка и игровой цикл"""
-import data.world.world as world
+import data.game as game
 
 if __name__ == '__main__':
-    Game = world.Game()
+    Game = game.Game()
     Game.start()
